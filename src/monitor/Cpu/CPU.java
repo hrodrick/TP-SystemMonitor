@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monitor;
+package monitor.Cpu;
 
 /**
  *
@@ -14,4 +14,7 @@ public interface CPU {
     public String getModelo();
     public String getFabricante();
     public Boolean esDe64Bits();
+    public String getNombre();
+    public int getNucleosLogicos();
+    public int getNucleosFisicos();
 }

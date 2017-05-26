@@ -12,8 +12,13 @@ package monitor;
 public class Testing {
         public static void main(String[] Args){
             Monitor m = new MonitorWindows();
-            String familia = m.getMicro().getFamilia();
-            System.err.print(familia);
+            
+            System.out.println("familia: "+m.getMicro().getFamilia());
+            System.out.println("modelo: "+m.getMicro().getModelo());
+            System.out.println("fabricante: "+m.getMicro().getFabricante());
+            System.out.println("Nombre: "+m.getMicro().getNombre());
+            System.out.println("Nucleos: "+m.getMicro().getNucleosFisicos());
+            System.out.println("Hilos: "+m.getMicro().getNucleosLogicos());
             //Tester de Rodrigo soria. -testeando
         }
 }

@@ -1,6 +1,8 @@
 
 package monitor;
 
+import monitor.Cpu.CpuLinux;
+
 public class MonitorLinux extends Monitor {
     static CpuLinux micro;
     static{ //Esto es un bloque de inicializacion statico. Se ejecuta ni bien se ejecuta la linea Main.
