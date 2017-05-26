@@ -14,5 +14,6 @@ public class Testing {
             Monitor m = new MonitorWindows();
             String familia = m.getMicro().getFamilia();
             System.err.print(familia);
+            //Tester de Rodrigo soria. -testeando
         }
 }
