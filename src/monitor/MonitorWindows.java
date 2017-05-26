@@ -1,6 +1,8 @@
 
 package monitor;
 
+import monitor.Cpu.CpuWindows;
+
 
 public class MonitorWindows extends Monitor {
     static CpuWindows micro;
