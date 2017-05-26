@@ -16,6 +16,7 @@ public class TextingconX extends javax.swing.JFrame {
      */
     public TextingconX() {
         initComponents();
+        //hay una interface llamada networking para hacer lo de NIC
     }
 
     /**
