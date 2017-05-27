@@ -27,6 +27,11 @@ public class Testing {
             System.out.println("Memoria de intercambio total: " + m.getMemoria().getMemIntercambioTotal());
             System.out.println("Memoria de intercambio usada: " + m.getMemoria().getMemIntercambioUsada());
             System.out.println("Memoria de intercambio dispo: "+ + m.getMemoria().getMemIntercambioDisponible());
+            //TesteandoSistemaOperativo
+            System.out.println("Fabricante SO: " + m.getSistemaOperativo().getFabricanteOS());
+            System.out.println("Familia SO: " + m.getSistemaOperativo().getFamiliaOS());
+            System.out.println("Version SO: " + m.getSistemaOperativo().getVersionOS());
+            System.out.println("Edicion SO: " + m.getSistemaOperativo().getEdicionOS());
             
         }
 }

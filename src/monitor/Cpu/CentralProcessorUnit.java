@@ -56,5 +56,9 @@ public abstract class CentralProcessorUnit implements CPU{
         
         return p.getName();
     }
+    @Override
+    public double getUsoActualDeCpu(){
+        return p.getSystemCpuLoad();
+    }
     
 }

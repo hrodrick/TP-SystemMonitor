@@ -17,4 +17,5 @@ public interface CPU {
     public String getNombre();
     public int getNucleosLogicos();
     public int getNucleosFisicos();
+    public double getUsoActualDeCpu();
 }
