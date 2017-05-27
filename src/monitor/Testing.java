@@ -32,6 +32,14 @@ public class Testing {
             System.out.println("Familia SO: " + m.getSistemaOperativo().getFamiliaOS());
             System.out.println("Version SO: " + m.getSistemaOperativo().getVersionOS());
             System.out.println("Edicion SO: " + m.getSistemaOperativo().getEdicionOS());
+            //TesteandoSensores
+            System.out.println("Temperatura CPU: " + m.getSensores().getTempCPU());
+            System.out.println("Voltaje CPU: " + m.getSensores().getVoltajeCPU());
+            int fansSpeed[] = m.getSensores().getVelVentiladores();
+            for(int i = 0; i < fansSpeed.length; i++){
+                System.out.println("Velocidad ventilador "+ i +": "+ fansSpeed[i]);
+            }
+            
             
         }
 }

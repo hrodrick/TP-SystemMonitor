@@ -9,7 +9,7 @@ import oshi.hardware.platform.windows.WindowsGlobalMemory;
 
 
 public class Memoria implements IMemoria{
-    AbstractGlobalMemory memory;
+    private AbstractGlobalMemory memory;
     
     public Memoria(AbstractGlobalMemory a){
         this.memory = a;

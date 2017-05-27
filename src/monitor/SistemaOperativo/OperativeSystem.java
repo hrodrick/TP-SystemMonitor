@@ -10,7 +10,7 @@ import oshi.software.common.AbstractOperatingSystem;
  * @author Rodrigo Soria
  */
 public class OperativeSystem implements OS{
-    AbstractOperatingSystem opSystem;
+    private AbstractOperatingSystem opSystem;
     
     public OperativeSystem(AbstractOperatingSystem opSystem){
         this.opSystem = opSystem;
