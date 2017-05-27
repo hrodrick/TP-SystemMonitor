@@ -2,15 +2,20 @@
 package monitor;
 
 import monitor.Cpu.CpuWindows;
+import monitor.Memoria.MemoriaWindows;
 
 
 public class MonitorWindows extends Monitor {
     static CpuWindows micro;
-    static{ //Esto es un bloque de inicializacion statico. Se ejecuta antes de cualquier otra instruccion
-            //En el inicio del programa.
+    static MemoriaWindows memoria;
+    
+    static{  
         micro = new CpuWindows(); 
+        memoria = new MemoriaWindows();
     }
+    
+    
     public MonitorWindows() {
-        super(MonitorWindows.micro);
+        super(MonitorWindows.micro, MonitorWindows.memoria);
     }
 }

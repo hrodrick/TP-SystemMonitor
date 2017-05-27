@@ -2,14 +2,20 @@
 package monitor;
 
 import monitor.Cpu.CpuLinux;
+import monitor.Memoria.MemoriaLinux;
 
 public class MonitorLinux extends Monitor {
     static CpuLinux micro;
-    static{ //Esto es un bloque de inicializacion statico. Se ejecuta ni bien se ejecuta la linea Main.
-        micro = new CpuLinux(); 
+    static MemoriaLinux memoria;
+    
+    static{ //Esto es un bloque de inicializacion statico. Se ejecuta antes que cualquier otra instruccion
+        micro = new CpuLinux();
+        memoria = new MemoriaLinux();
     }
+    
+    
     public MonitorLinux() {
-        super(MonitorLinux.micro);
+        super(MonitorLinux.micro, MonitorLinux.memoria);
     }
     
 }

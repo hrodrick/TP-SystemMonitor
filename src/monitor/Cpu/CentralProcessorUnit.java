@@ -3,7 +3,7 @@ import oshi.hardware.CentralProcessor;
 
 
 
-public class CentralProcessorUnit implements CPU{
+public abstract class CentralProcessorUnit implements CPU{
     CentralProcessor p;
     
     public CentralProcessorUnit(CentralProcessor p) {
