@@ -20,5 +20,13 @@ public class Testing {
             System.out.println("Nucleos: "+m.getMicro().getNucleosFisicos());
             System.out.println("Hilos: "+m.getMicro().getNucleosLogicos());
             //Tester de Rodrigo soria. -testeando
+            //TesteandoMemoria
+            System.out.println("Memoria RAM total: " + m.getMemoria().getMemFisicaTotal());
+            System.out.println("Memoria RAM usada: " + m.getMemoria().getMemFisicaUsada());
+            System.out.println("Memoria RAM dispo: " + m.getMemoria().getMemFisicaDisponible());
+            System.out.println("Memoria de intercambio total: " + m.getMemoria().getMemIntercambioTotal());
+            System.out.println("Memoria de intercambio usada: " + m.getMemoria().getMemIntercambioUsada());
+            System.out.println("Memoria de intercambio dispo: "+ + m.getMemoria().getMemIntercambioDisponible());
+            
         }
 }
