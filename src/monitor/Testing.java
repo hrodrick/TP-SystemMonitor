@@ -39,7 +39,8 @@ public class Testing {
             for(int i = 0; i < fansSpeed.length; i++){
                 System.out.println("Velocidad ventilador "+ i +": "+ fansSpeed[i]);
             }
-            
-            
+            //Testeando PlacaMadre
+            System.out.println("Marca Placa madre: " + m.getPlacaMadre().getMarcaMother());
+            System.out.println("Modelo Placa madre: " + m.getPlacaMadre().getModeloMother());
         }
 }
