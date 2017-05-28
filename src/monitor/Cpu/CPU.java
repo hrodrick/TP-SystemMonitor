@@ -1,21 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package monitor.Cpu;
+import oshi.hardware.CentralProcessor;
 
-/**
- *
- * @author Alumno
- */
-public interface CPU {
-    public String getFamilia();
-    public String getModelo();
-    public String getFabricante();
-    public Boolean esDe64Bits();
-    public String getNombre();
-    public int getNucleosLogicos();
-    public int getNucleosFisicos();
-    public double getUsoActualDeCpu();
+
+
+public abstract class CPU implements ICPU{
+    private CentralProcessor p;
+    
+    public CPU(CentralProcessor p) {
+        this.p = p;
+    }
+
+    @Override
+    public String getFamiliaCPU() {
+        return p.getFamily();
+    }
+
+
+    @Override
+    public String getModeloCPU() {
+    
+        return p.getModel();
+    }
+
+
+    @Override
+    public String getFabricanteCPU() {
+        
+        return p.getVendor();
+    }
+
+
+    @Override
+    public Boolean esDe64Bits() {
+        
+        return p.isCpu64bit();
+    }
+    
+
+    @Override
+    public int getNucleosLogicosCPU() {
+        
+        return p.getLogicalProcessorCount();
+    }
+    
+
+    @Override
+    public int getNucleosFisicosCPU() {
+        
+        return p.getPhysicalProcessorCount();
+    }
+    
+
+    @Override
+    public String getNombreCPU() {
+        
+        return p.getName();
+    }
+    @Override
+    public double getUsoActualCPU(){
+        return p.getSystemCpuLoad();
+    }
+    
 }

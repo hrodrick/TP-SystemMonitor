@@ -13,7 +13,7 @@ import oshi.hardware.ComputerSystem;
  */
 public class PlacaMadre implements MotherBoard{
     
-    ComputerSystem sistema;
+    private ComputerSystem sistema;
     
     PlacaMadre(ComputerSystem sistema){
         this.sistema = sistema;

@@ -2,22 +2,22 @@
 
 package monitor;
 
-import monitor.Cpu.CPU;
 import monitor.Memoria.Memoria;
 import monitor.Sensores.Sensores;
-import monitor.SistemaOperativo.OperativeSystem;
+import monitor.SistemaOperativo.OS;
 import monitor.PlacaMadre.PlacaMadre;
+import monitor.Cpu.CPU;
 
 
 public abstract class Monitor {
     private CPU micro;
     private Memoria memory;
-    private OperativeSystem sistemaOperativo;
+    private OS sistemaOperativo;
     private Sensores sensores;
     private PlacaMadre motherBoard;
     
     
-    public Monitor(CPU micro, Memoria memory, OperativeSystem sistemaOperativo, 
+    public Monitor(CPU micro, Memoria memory, OS sistemaOperativo, 
                    Sensores sensores, PlacaMadre placaMadre){
         
         this.micro = micro;
@@ -35,7 +35,7 @@ public abstract class Monitor {
         return memory;
     }
     
-    public OperativeSystem getSistemaOperativo(){
+    public OS getSistemaOperativo(){
         return sistemaOperativo;
     }
     public Sensores getSensores(){

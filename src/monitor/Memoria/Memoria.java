@@ -26,22 +26,22 @@ public class Memoria implements IMemoria{
     }
 
     @Override
-    public long getMemFisicaUsada() {
+    public long getMemFisicaUso() {
         return (this.memory.getTotal() - this.memory.getAvailable());
     }
 
     @Override
-    public long getMemIntercambioTotal() {
+    public long getMemSwapTotal() {
         return this.memory.getSwapTotal();
     }
 
     @Override
-    public long getMemIntercambioUsada() {
+    public long getMemSwapUso() {
         return this.memory.getSwapUsed();
     }
 
     @Override
-    public long getMemIntercambioDisponible() {
+    public long getMemSwapDisponible() {
         return  (this.memory.getSwapTotal() - this.memory.getSwapUsed());
     }
     

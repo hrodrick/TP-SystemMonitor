@@ -4,14 +4,35 @@
  * and open the template in the editor.
  */
 package monitor.SistemaOperativo;
-
+import oshi.software.common.AbstractOperatingSystem;
 /**
  *
  * @author Rodrigo Soria
  */
-public interface OS {
-    public String getFamiliaOS();
-    public String getVersionOS();
-    public String getFabricanteOS();
-    public String getEdicionOS();
+public class OS implements OperativeSys{
+    private AbstractOperatingSystem opSystem;
+    
+    public OS(AbstractOperatingSystem opSystem){
+        this.opSystem = opSystem;
+    }
+    
+    @Override
+    public String getFamiliaOS() {
+        return opSystem.getFamily();
+    }
+
+    @Override
+    public String getVersionOS() {
+        return opSystem.getVersion().getVersion();
+    }
+
+    @Override
+    public String getFabricanteOS() {
+        return opSystem.getManufacturer();
+    }
+    @Override
+    public String getEdicionOS(){
+        return opSystem.getVersion().getCodeName();
+    }
+    
 }

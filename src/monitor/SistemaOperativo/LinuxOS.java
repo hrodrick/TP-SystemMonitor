@@ -11,7 +11,7 @@ import oshi.software.os.linux.LinuxOperatingSystem;
  *
  * @author Rodrigo Soria
  */
-public class LinuxOS extends OperativeSystem{
+public class LinuxOS extends OS{
     
     public LinuxOS(){
         super(new LinuxOperatingSystem());

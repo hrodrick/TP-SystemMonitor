@@ -5,15 +5,13 @@
  */
 package monitor.SistemaOperativo;
 
-import oshi.software.os.windows.WindowsOperatingSystem;
-
 /**
  *
  * @author Rodrigo Soria
  */
-public class WindowsOS extends OS{
-    
-    public WindowsOS(){
-        super(new WindowsOperatingSystem());
-    }
+public interface OperativeSys {
+    public String getFamiliaOS();
+    public String getVersionOS();
+    public String getFabricanteOS();
+    public String getEdicionOS();
 }

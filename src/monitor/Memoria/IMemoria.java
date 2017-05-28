@@ -12,9 +12,9 @@ package monitor.Memoria;
 public interface IMemoria {
     public long getMemFisicaTotal();
     public long getMemFisicaDisponible();
-    public long getMemFisicaUsada();
-    public long getMemIntercambioTotal();
-    public long getMemIntercambioUsada();
-    public long getMemIntercambioDisponible();
+    public long getMemFisicaUso();
+    public long getMemSwapTotal();
+    public long getMemSwapUso();
+    public long getMemSwapDisponible();
     
 }
