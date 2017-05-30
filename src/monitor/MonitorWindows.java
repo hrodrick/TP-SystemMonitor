@@ -21,7 +21,7 @@ public class MonitorWindows extends Monitor {
         memoria = new MemoriaWindows();
         sistemaOperativo = new WindowsOS();
         sensores = new SensoresWindows();
-        motherBoard = new PlacaMadreWindows();
+        motherBoard = new PlacaMadreWindows();        
     }
     
     

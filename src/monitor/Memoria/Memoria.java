@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package monitor.Memoria;
+import monitor.JSONSerializable;
 import oshi.hardware.common.AbstractGlobalMemory;
 import oshi.hardware.platform.windows.WindowsGlobalMemory;
 
 
-public class Memoria implements IMemoria{
+public abstract class Memoria implements IMemoria,
+                              JSONSerializable{
     private AbstractGlobalMemory memory;
     
     public Memoria(AbstractGlobalMemory a){
@@ -44,6 +46,17 @@ public class Memoria implements IMemoria{
     public long getMemSwapDisponible() {
         return  (this.memory.getSwapTotal() - this.memory.getSwapUsed());
     }
-    
+    @Override
+    public String toJson() {       
+        
+        String Json = "{\"Memoria RAM total \":" + this.getMemFisicaTotal()
+                + "\"Memoria RAM usada \":" + this.getMemFisicaUso()
+                + "\"Memoria RAM disponible \":" + this.getMemFisicaDisponible()
+                + "\"Memoria de intercambio total \":" + this.getMemSwapTotal()
+                + "\"Memoria de intercambio usada\":" + this.getMemSwapUso()
+                + "\"Memoria de intercambio disponible\":" + this.getMemSwapDisponible()+"}";
+        
+        return Json;
+    }   
     
 }

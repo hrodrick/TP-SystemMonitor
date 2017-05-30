@@ -11,39 +11,17 @@ package monitor;
  */
 public class Testing {
         public static void main(String[] Args){
-            Monitor m = new MonitorWindows();
-            
-            System.out.println("familia: "+m.getMicro().getFamiliaCPU());
-            System.out.println("modelo: "+m.getMicro().getModeloCPU());
-            System.out.println("fabricante: "+m.getMicro().getFabricanteCPU());
-            System.out.println("Nombre: "+m.getMicro().getNombreCPU());
-            System.out.println("Nucleos: "+m.getMicro().getNucleosFisicosCPU());
-            System.out.println("Hilos: "+m.getMicro().getNucleosLogicosCPU());
-            //Tester de Rodrigo soria. -testeando
+            Monitor m = new MonitorWindows();            
+            System.out.println(m.getMicro().toJson());            
+            //Tester de Rodrigo soria. -testeando modificado por Mischuk por los JSON
             //TesteandoMemoria
-            System.out.println("Memoria RAM total: " + m.getMemoria().getMemFisicaTotal());
-            System.out.println("Memoria RAM usada: " + m.getMemoria().getMemFisicaUso());
-            System.out.println("Memoria RAM dispo: " + m.getMemoria().getMemFisicaDisponible());
-            System.out.println("Memoria de intercambio total: " + m.getMemoria().getMemSwapTotal());
-            System.out.println("Memoria de intercambio usada: " + m.getMemoria().getMemSwapUso());
-            System.out.println("Memoria de intercambio dispo: "+ + m.getMemoria().getMemSwapDisponible());
+            System.out.println(m.getMemoria().toJson());
             //TesteandoSistemaOperativo
-            System.out.println("Fabricante SO: " + m.getSistemaOperativo().getFabricanteOS());
-            System.out.println("Familia SO: " + m.getSistemaOperativo().getFamiliaOS());
-            System.out.println("Version SO: " + m.getSistemaOperativo().getVersionOS());
-            System.out.println("Edicion SO: " + m.getSistemaOperativo().getEdicionOS());
+            System.out.println(m.getSistemaOperativo().toJson());
             //TesteandoSensores
-            System.out.println("Temperatura CPU: " + m.getSensores().getTempCPU());
-            System.out.println("Voltaje CPU: " + m.getSensores().getVoltajeCPU());
-            int fansSpeed[] = m.getSensores().getVelVentiladores();
-            for(int i = 0; i < fansSpeed.length; i++){
-                System.out.println("Velocidad ventilador "+ i +": "+ fansSpeed[i]);
-            }
+            System.out.println(m.getSensores().toJson());
             //Testeando PlacaMadre
-            System.out.println("Marca Placa madre: " + m.getPlacaMadre().getMarcaMother());
-            System.out.println("Modelo Placa madre: " + m.getPlacaMadre().getModeloMother());
-            
-            
+            System.out.println(m.getPlacaMadre().toJson());            
             
         }
 }

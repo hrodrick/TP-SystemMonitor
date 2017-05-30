@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package monitor.SistemaOperativo;
+import monitor.JSONSerializable;
 import oshi.software.common.AbstractOperatingSystem;
 /**
  *
  * @author Rodrigo Soria
  */
-public class OS implements OperativeSys{
+public abstract class OS implements OperativeSys,
+                            JSONSerializable{
     private AbstractOperatingSystem opSystem;
     
     public OS(AbstractOperatingSystem opSystem){
@@ -34,5 +36,16 @@ public class OS implements OperativeSys{
     public String getEdicionOS(){
         return opSystem.getVersion().getCodeName();
     }
+    @Override
+    public String toJson() {                      
+        
+        String Json = "{\"Fabricante SO \":" + this.getFabricanteOS()
+                + "\"Familia SO \":" + this.getFamiliaOS()
+                + "\"Version SO \":" + this.getVersionOS()
+                + "\"Edicion SO \":" + this.getVersionOS()+"}";
+        
+        return Json;
+    }
+    
     
 }

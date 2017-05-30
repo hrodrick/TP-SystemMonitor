@@ -5,21 +5,23 @@
  */
 package monitor.PlacaMadre;
 
+import monitor.JSONSerializable;
 import oshi.hardware.ComputerSystem;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public class PlacaMadre implements MotherBoard{
-    
+public abstract class PlacaMadre implements MotherBoard,
+                                            JSONSerializable {
+
     private ComputerSystem sistema;
-    
-    PlacaMadre(ComputerSystem sistema){
+
+    PlacaMadre(ComputerSystem sistema) {
         this.sistema = sistema;
-        
+
     }
-    
+
     @Override
     public String getMarcaMother() {
         return sistema.getBaseboard().getManufacturer();
@@ -30,4 +32,14 @@ public class PlacaMadre implements MotherBoard{
         return sistema.getBaseboard().getModel();
     }
     
+    @Override
+    public String toJson() {             
+        
+        String Json = "{\"Marca Placa madre \":" + this.getMarcaMother()                
+                + "\"Modelo placa madre \":" + this.getModeloMother()+"}";
+        
+        return Json;
+    }
+
+
 }
