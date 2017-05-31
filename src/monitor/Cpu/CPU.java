@@ -65,6 +65,7 @@ public abstract class CPU implements ICPU,
                 + "\"Fabricante \":" + this.getFabricanteCPU()
                 + "\"Nombre \":" + this.getNombreCPU()
                 + "\"Nucleos \":" + this.getNucleosFisicosCPU()
+                + "\"Uso actual \":" + this.getUsoActualCPU()
                 + "\"Hilos \":" + this.getNucleosLogicosCPU()+"}";
         
         return Json;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
 
 import java.io.FileNotFoundException;
@@ -12,11 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-/**
- *
- * @author turin
- */
 public class ArchivoJSON {
 
     private static FileWriter file;
@@ -38,7 +28,7 @@ public class ArchivoJSON {
             //pw = new PrintWriter(fichero);
             file = new FileWriter("c:/prueba.txt");
             pw = new PrintWriter(file);
-            pw.print(cadenaJson);
+            pw.print(cadenaJson);            
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,7 +37,7 @@ public class ArchivoJSON {
                 // Nuevamente aprovechamos el finally para 
                 // asegurarnos que se cierra el fichero.
                 if (null != file) {
-                    file.close();
+                    file.close();                    
                 }
             } catch (Exception e2) {
                 e2.printStackTrace();
