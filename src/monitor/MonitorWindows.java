@@ -6,7 +6,7 @@ import monitor.Memoria.MemoriaWindows;
 import monitor.PlacaMadre.PlacaMadreWindows;
 import monitor.Sensores.SensoresWindows;
 import monitor.SistemaOperativo.WindowsOS;
-
+import monitor.NICS.NetworkingWindows;
 
 public class MonitorWindows extends Monitor {
     static CpuWindows micro;
@@ -14,7 +14,7 @@ public class MonitorWindows extends Monitor {
     static WindowsOS sistemaOperativo;
     static SensoresWindows sensores;
     static PlacaMadreWindows motherBoard;
-    
+    static NetworkingWindows NICS;
     
     static{  
         micro = new CpuWindows(); 
@@ -22,10 +22,11 @@ public class MonitorWindows extends Monitor {
         sistemaOperativo = new WindowsOS();
         sensores = new SensoresWindows();
         motherBoard = new PlacaMadreWindows();        
+        NICS = new NetworkingWindows();
     }
     
     
     public MonitorWindows() {
-        super(micro, memoria, sistemaOperativo, sensores, motherBoard);
+        super(micro, memoria, sistemaOperativo, sensores, motherBoard, NICS);
     }
 }

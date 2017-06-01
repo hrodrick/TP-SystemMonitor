@@ -7,6 +7,7 @@ import monitor.Sensores.Sensores;
 import monitor.SistemaOperativo.OS;
 import monitor.PlacaMadre.PlacaMadre;
 import monitor.Cpu.CPU;
+import monitor.NICS.Networking;
 
 
 public abstract class Monitor {
@@ -15,16 +16,18 @@ public abstract class Monitor {
     private OS sistemaOperativo;
     private Sensores sensores;
     private PlacaMadre motherBoard;
+    private Networking NICS;
     
     
     public Monitor(CPU micro, Memoria memory, OS sistemaOperativo, 
-                   Sensores sensores, PlacaMadre placaMadre){
+                   Sensores sensores, PlacaMadre placaMadre, Networking nics){
         
         this.micro = micro;
         this.memory = memory;
         this.sistemaOperativo = sistemaOperativo;
         this.sensores = sensores;
         this.motherBoard = placaMadre;
+        this.NICS = nics;
     }
     
     public CPU getMicro() {
@@ -43,5 +46,8 @@ public abstract class Monitor {
     }
     public PlacaMadre getPlacaMadre(){
         return motherBoard;
+    }
+    public Networking getNetworks(){
+        return NICS;
     }
 }
