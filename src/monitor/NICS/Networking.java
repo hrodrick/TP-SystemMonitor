@@ -14,7 +14,7 @@ import oshi.hardware.common.AbstractNetworks;
  *
  * @author Rodrigo Soria
  */
-public class Networking implements INetworking{
+public abstract class Networking implements INetworking{
     
     private AbstractNetworks networks;
     private ArrayList<NIC> nics;
