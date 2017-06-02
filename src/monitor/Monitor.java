@@ -2,26 +2,28 @@
 
 package monitor;
 
-import monitor.Memoria.Memoria;
-import monitor.Sensores.Sensores;
-import monitor.SistemaOperativo.OS;
-import monitor.PlacaMadre.PlacaMadre;
-import monitor.Cpu.CPU;
-import monitor.NICS.Networking;
+import java.util.ArrayList;
+import monitor.Cpu.ICPU;
+import monitor.Memoria.IMemoria;
+import monitor.NICS.INetworking;
+import monitor.PlacaMadre.MotherBoard;
+import monitor.Sensores.ISensores;
+import monitor.SistemaOperativo.OperativeSys;
 
 
 public abstract class Monitor implements JSONSerializable{
     //TODO: ESTOS OBJETOS DEBEN SER DEL TIPO DE LA INTERFAZ. NO DE LA CLASE. A su vez renombrar las demas clases
-    private CPU micro;
-    private Memoria memory;
-    private OS sistemaOperativo;
-    private Sensores sensores;
-    private PlacaMadre motherBoard;
-    private Networking NICS;
+    private ICPU micro;
+    private IMemoria memory;
+    private OperativeSys sistemaOperativo;
+    private ISensores sensores;
+    private MotherBoard motherBoard;
+    private INetworking NICS;
+    private ArrayList<String> serializables;
     
     
-    public Monitor(CPU micro, Memoria memory, OS sistemaOperativo, 
-                   Sensores sensores, PlacaMadre placaMadre, Networking nics){
+    public Monitor(ICPU micro, IMemoria memory, OperativeSys sistemaOperativo, 
+                   ISensores sensores, MotherBoard placaMadre, INetworking nics){
         
         this.micro = micro;
         this.memory = memory;
@@ -31,30 +33,31 @@ public abstract class Monitor implements JSONSerializable{
         this.NICS = nics;
     }
     
-    public CPU getMicro() {
+    public ICPU getMicro() {
         return micro;
     }
     
-    public Memoria getMemoria(){
+    public IMemoria getMemoria(){
         return memory;
     }
     
-    public OS getSistemaOperativo(){
+    public OperativeSys getSistemaOperativo(){
         return sistemaOperativo;
     }
-    public Sensores getSensores(){
+    public ISensores getSensores(){
         return sensores;
     }
-    public PlacaMadre getPlacaMadre(){
+    public MotherBoard getPlacaMadre(){
         return motherBoard;
     }
-    public Networking getNetworks(){
+    public INetworking getNetworks(){
         return NICS;
     }
     @Override
     public String toJson() {        
+        //TODO: debera retornar un String que sean todos los serializables juntos.
+        //Serializables deben de ser todos los String de todos los TOJSON de los objetos del monitor.
         String Json = null;
-        
         return Json;
     }
 }
