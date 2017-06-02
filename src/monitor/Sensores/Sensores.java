@@ -1,11 +1,9 @@
 package monitor.Sensores;
 
-import java.util.ArrayList;
-import monitor.JSONSerializable;
+
 import oshi.hardware.Sensors;
 
-public abstract class Sensores implements ISensores,
-        JSONSerializable {
+public abstract class Sensores implements ISensores{
 
     private Sensors sensores;
 

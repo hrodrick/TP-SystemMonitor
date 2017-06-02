@@ -1,10 +1,9 @@
 package monitor.Cpu;
 
-import monitor.JSONSerializable;
+
 import oshi.hardware.CentralProcessor;
 
-public abstract class CPU implements ICPU,
-                                     JSONSerializable {
+public abstract class CPU implements ICPU{
 
     private CentralProcessor p;
 

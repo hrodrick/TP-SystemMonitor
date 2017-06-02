@@ -5,11 +5,13 @@
  */
 package monitor.PlacaMadre;
 
+import monitor.JSONSerializable;
+
 /**
  *
  * @author Rodrigo Soria
  */
-public interface MotherBoard {
+public interface MotherBoard extends JSONSerializable{
     public String getMarcaMother();
     public String getModeloMother();
 }

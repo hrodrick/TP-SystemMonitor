@@ -5,15 +5,13 @@
  */
 package monitor.PlacaMadre;
 
-import monitor.JSONSerializable;
 import oshi.hardware.ComputerSystem;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public abstract class PlacaMadre implements MotherBoard,
-                                            JSONSerializable {
+public abstract class PlacaMadre implements MotherBoard{
 
     private ComputerSystem sistema;
 

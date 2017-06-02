@@ -6,15 +6,13 @@
 package monitor.NICS;
 
 import java.util.Arrays;
-import monitor.JSONSerializable;
 import oshi.hardware.NetworkIF;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public class NIC implements INIC,
-                            JSONSerializable{
+public class NIC implements INIC{
     
     private NetworkIF controladorRed; 
     

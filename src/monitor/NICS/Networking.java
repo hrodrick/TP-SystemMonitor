@@ -33,8 +33,7 @@ public abstract class Networking implements INetworking{
     private void establecerNics(){
         for(NetworkIF NIFcontroller : networks.getNetworks()){
             nics.add(new NIC(NIFcontroller));
-        }
-        
+        }   
     }
     
 }

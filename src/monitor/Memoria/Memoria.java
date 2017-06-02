@@ -4,13 +4,10 @@
  * and open the template in the editor.
  */
 package monitor.Memoria;
-import monitor.JSONSerializable;
 import oshi.hardware.common.AbstractGlobalMemory;
-import oshi.hardware.platform.windows.WindowsGlobalMemory;
 
 
-public abstract class Memoria implements IMemoria,
-                              JSONSerializable{
+public abstract class Memoria implements IMemoria{
     private AbstractGlobalMemory memory;
     
     public Memoria(AbstractGlobalMemory a){

@@ -10,7 +10,8 @@ import monitor.Cpu.CPU;
 import monitor.NICS.Networking;
 
 
-public abstract class Monitor {
+public abstract class Monitor implements JSONSerializable{
+    //TODO: ESTOS OBJETOS DEBEN SER DEL TIPO DE LA INTERFAZ. NO DE LA CLASE. A su vez renombrar las demas clases
     private CPU micro;
     private Memoria memory;
     private OS sistemaOperativo;
@@ -49,5 +50,11 @@ public abstract class Monitor {
     }
     public Networking getNetworks(){
         return NICS;
+    }
+    @Override
+    public String toJson() {        
+        String Json = null;
+        
+        return Json;
     }
 }

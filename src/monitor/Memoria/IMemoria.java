@@ -5,11 +5,13 @@
  */
 package monitor.Memoria;
 
+import monitor.JSONSerializable;
+
 /**
  *
  * @author Portatil
  */
-public interface IMemoria {
+public interface IMemoria extends JSONSerializable{
     public long getMemFisicaTotal();
     public long getMemFisicaDisponible();
     public long getMemFisicaUso();

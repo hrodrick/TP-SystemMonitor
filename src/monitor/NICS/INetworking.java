@@ -6,12 +6,13 @@
 package monitor.NICS;
 
 import java.util.ArrayList;
+import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface INetworking {
+public interface INetworking{
    
     public ArrayList<NIC> getNics();
 }

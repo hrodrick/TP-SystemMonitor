@@ -5,11 +5,13 @@
  */
 package monitor.Cpu;
 
+import monitor.JSONSerializable;
+
 /**
  *
  * @author Alumno
  */
-public interface ICPU {
+public interface ICPU  extends JSONSerializable{
     public String getFamiliaCPU();
     public String getModeloCPU();
     public String getFabricanteCPU();

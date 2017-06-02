@@ -5,13 +5,13 @@
  */
 package monitor.Sensores;
 
-import java.util.ArrayList;
+import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface ISensores {
+public interface ISensores extends JSONSerializable{
     public Double getTempCPU();
     public Double getVoltajeCPU();
     public int[] getVelVentiladores();
