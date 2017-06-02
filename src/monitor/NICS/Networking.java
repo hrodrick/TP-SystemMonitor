@@ -16,21 +16,25 @@ import oshi.hardware.common.AbstractNetworks;
  */
 public class Networking implements INetworking{
     
-    AbstractNetworks networks;
+    private AbstractNetworks networks;
+    private ArrayList<NIC> nics;
     
     public Networking(AbstractNetworks nets){
         networks = nets;
+        nics = new ArrayList<>();
+        establecerNics();
     }
     
     @Override
     public ArrayList<NIC> getNics() {
-        NetworkIF nets[] = networks.getNetworks();
-        ArrayList<NIC> nics = new ArrayList<>();
-        for(NetworkIF NIFcontroller : nets){
+        return nics;
+    }
+    
+    private void establecerNics(){
+        for(NetworkIF NIFcontroller : networks.getNetworks()){
             nics.add(new NIC(NIFcontroller));
         }
         
-        return nics;
     }
     
 }
