@@ -41,7 +41,8 @@ public abstract class Networking implements INetworking{
     
     @Override
     public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String json = null;
+        return null;
     }
     
 }
