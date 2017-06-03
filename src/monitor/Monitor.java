@@ -21,7 +21,6 @@ public abstract class Monitor implements JSONSerializable{
     private INetworking NICS;
     private ArrayList<String> serializables;
     
-    
     public Monitor(ICPU micro, IMemoria memory, OperativeSys sistemaOperativo, 
                    ISensores sensores, MotherBoard placaMadre, INetworking nics){
         

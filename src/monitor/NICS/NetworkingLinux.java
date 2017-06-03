@@ -5,6 +5,7 @@
  */
 package monitor.NICS;
 
+import oshi.hardware.NetworkIF;
 import oshi.hardware.platform.linux.LinuxNetworks;
 
 /**
@@ -12,7 +13,17 @@ import oshi.hardware.platform.linux.LinuxNetworks;
  * @author Rodrigo Soria
  */
 public class NetworkingLinux extends Networking{
+    
     public NetworkingLinux(){
         super(new LinuxNetworks());
     }
+
+    @Override
+    protected void establecerTodasLasNics(NetworkIF[] nics) {
+        for(NetworkIF n : nics)
+             this.nics.add(new NicLinux(n));
+                
+    }
+
+    
 }

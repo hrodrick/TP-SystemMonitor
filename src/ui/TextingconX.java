@@ -3,6 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// mira esto pelotudo jpanel.addchild(...)
+// for ( network n : ---){
+//  jpanel.add(new jlabel(" ")
+//}
+//class labelnic extends jlabel 
+//          labelnic (nic n)
+//          super ()
+
 package ui;
 
 /**

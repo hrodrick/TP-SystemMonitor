@@ -5,14 +5,15 @@
  */
 package monitor.NICS;
 
-import java.util.ArrayList;
-import monitor.JSONSerializable;
+import oshi.hardware.NetworkIF;
 
 /**
  *
- * @author Rodrigo Soria
+ * @author Portatil
  */
-public interface INetworking extends JSONSerializable{
-   
-    public ArrayList<INIC> getNics();
+public class NicWindows extends NIC{
+    
+    public NicWindows(NetworkIF nic){
+        super(nic);
+    }
 }

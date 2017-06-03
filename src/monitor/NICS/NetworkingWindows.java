@@ -5,6 +5,7 @@
  */
 package monitor.NICS;
 
+import oshi.hardware.NetworkIF;
 import oshi.hardware.platform.windows.WindowsNetworks;
 
 /**
@@ -12,7 +13,14 @@ import oshi.hardware.platform.windows.WindowsNetworks;
  * @author Rodrigo Soria
  */
 public class NetworkingWindows extends Networking{
+    
     public NetworkingWindows(){
         super(new WindowsNetworks());
+    }
+
+    @Override
+    protected void establecerTodasLasNics(NetworkIF[] nics) {
+        for(NetworkIF n : nics)
+             this.nics.add(new NicWindows(n));
     }
 }

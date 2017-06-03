@@ -17,16 +17,17 @@ import oshi.hardware.common.AbstractNetworks;
 public abstract class Networking implements INetworking{
     
     private AbstractNetworks networks;
-    private ArrayList<NIC> nics;
+    protected ArrayList<INIC> nics;
     
     public Networking(AbstractNetworks nets){
         networks = nets;
         nics = new ArrayList<>();
+        establecerTodasLasNics(networks.getNetworks());
         establecerNics();
     }
     
     @Override
-    public ArrayList<NIC> getNics() {
+    public ArrayList<INIC> getNics() {
         return nics;
     }
     
@@ -34,6 +35,13 @@ public abstract class Networking implements INetworking{
         for(NetworkIF NIFcontroller : networks.getNetworks()){
             nics.add(new NIC(NIFcontroller));
         }   
+    }
+    protected abstract void establecerTodasLasNics(NetworkIF[] nics);
+    
+    
+    @Override
+    public String toJson() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

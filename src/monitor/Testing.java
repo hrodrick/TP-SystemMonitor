@@ -2,7 +2,7 @@ package monitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import monitor.NICS.NIC;
+import monitor.NICS.INIC;
 
 
 public class Testing {
@@ -20,14 +20,14 @@ public class Testing {
             System.out.println(m.getPlacaMadre().toJson());  
             //Testeando NICS - Uso basico-practico
             //NO BORRAR >:v
-            ArrayList<NIC> nics = m.getNetworks().getNics();
-            for(NIC controlador : nics){
+            ArrayList<INIC> nics = m.getNetworks().getNics();
+            for(INIC controlador : nics){
                 System.out.println("Nombre: " + controlador.getNombre());
                 System.out.println("IPv4: " + Arrays.toString(controlador.getIPv4()));
                 System.out.println("MAC: " + controlador.getMacAdress());
             }
             //Testeando NICS Json:
-            for (NIC controlador : nics)
+            for (INIC controlador : nics)
                 System.out.println(controlador.toJson());
             
         }
