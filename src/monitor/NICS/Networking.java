@@ -23,7 +23,6 @@ public abstract class Networking implements INetworking{
         networks = nets;
         nics = new ArrayList<>();
         establecerTodasLasNics(networks.getNetworks());
-        establecerNics();
     }
     
     @Override
@@ -31,18 +30,13 @@ public abstract class Networking implements INetworking{
         return nics;
     }
     
-    private void establecerNics(){
-        for(NetworkIF NIFcontroller : networks.getNetworks()){
-            nics.add(new NIC(NIFcontroller));
-        }   
-    }
     protected abstract void establecerTodasLasNics(NetworkIF[] nics);
     
     
     @Override
     public String toJson() {
         String json = null;
-        return null;
+        return json;
     }
     
 }
