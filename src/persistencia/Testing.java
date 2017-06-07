@@ -18,6 +18,7 @@ public class Testing {
     
     public static void main(String args[]) throws IOException{
     ///Practica de escritura en el archivo o algo asi
+    ///Libreria loca JSON tiene JSONStringer() fijarse esta funcion
         JSONObject obj = new JSONObject();
         Monitor m = new MonitorWindows();
         

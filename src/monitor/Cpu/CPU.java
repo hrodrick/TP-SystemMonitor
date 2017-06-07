@@ -1,6 +1,7 @@
 package monitor.Cpu;
 
 
+import org.json.JSONStringer;
 import oshi.hardware.CentralProcessor;
 
 public abstract class CPU implements ICPU{
@@ -58,16 +59,28 @@ public abstract class CPU implements ICPU{
     }
     @Override
     public String toJson() {        
+        /*Memoria chota y vieja
+        String Json = "{\"Familia\":\"" + this.getFamiliaCPU()+"\","
+                + "\"Modelo\": \"" +this.getModeloCPU()+"\","
+                + "\"Fabricante\":\"" +this.getFabricanteCPU()+"\","
+                + "\"Nombre\":\"" +this.getNombreCPU()+"\","
+                + "\"Nucleos\":\"" +this.getNucleosFisicosCPU()+"\","
+                + "\"Uso actual\":\""+this.getUsoActualCPU()+"\","
+                + "\"Hilos\":\"" +this.getNucleosLogicosCPU()+"\"}";
+        */
         
-        String Json = "{\"Familia \":" + this.getFamiliaCPU()
-                + "\"Modelo \":" + this.getModeloCPU()
-                + "\"Fabricante \":" + this.getFabricanteCPU()
-                + "\"Nombre \":" + this.getNombreCPU()
-                + "\"Nucleos \":" + this.getNucleosFisicosCPU()
-                + "\"Uso actual \":" + this.getUsoActualCPU()
-                + "\"Hilos \":" + this.getNucleosLogicosCPU()+"}";
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Fabricante").value(this.getFabricanteCPU())
+                .key("Familia").value(this.getFamiliaCPU())
+                .key("Modelo").value(this.getModeloCPU())               
+                .key("Nombre").value(this.getNombreCPU())               
+                .key("Nucleos fisicos").value(this.getNucleosFisicosCPU())
+                .key("Nucleos logicos").value(this.getNucleosLogicosCPU())
+                .key("Uso actual").value(this.getUsoActualCPU())
+                .endObject().toString();
+        return Json;        
         
-        return Json;
     }
 
 }

@@ -6,6 +6,7 @@
 package monitor.NICS;
 
 import java.util.Arrays;
+import org.json.JSONStringer;
 import oshi.hardware.NetworkIF;
 
 /**
@@ -33,10 +34,30 @@ public class NIC implements INIC{
     }
 
     @Override
-    public String toJson() {
-        String Json = "{\"Nombre \":" + this.getNombre()
-                + "\"IPv4 \":" + Arrays.toString(this.getIPv4())
-                + "\"MAC \":" + this.getMacAdress()+"}";
+    public String toJson() {         
+        
+        /*Forma Vieja y chota
+        String IPs[] = this.getIPv4();
+        String IPv4 = "\"IPv4\":\"" ;
+        for(int i=0;i<IPs.length;i++){
+            //if(i!=IPs.length)
+            IPv4 += i+", " + IPs[i];
+            //else
+            //IPv4 += i+ IPs[i];           
+        }   
+        
+        String Json = "{\"Nombre\":\"" +this.getNombre()+"\","                
+                + "\"MAC\":\"" +this.getMacAdress()+"\","
+                + IPv4 +"\"}";
+        */        
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Nombre").value(this.getNombre())
+                .key("IPv4").value(this.getIPv4())
+                .key("MAC").value(this.getMacAdress())
+                .endObject().toString();
+        
+        
         
         return Json;
     }

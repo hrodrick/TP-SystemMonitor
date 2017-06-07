@@ -20,6 +20,7 @@ public class Testing {
                 System.out.println("Usted tiene Windows instalado");
                 Monitor mW = new MonitorWindows();   
                 test(mW);
+                break;
             default:
                 System.out.println("Su sistema operativo aún no está soportado");
             }
@@ -37,13 +38,16 @@ public class Testing {
             //Testeando PlacaMadre
             System.out.println(m.getPlacaMadre().toJson());  
             //Testeando NICS - Uso basico-practico
+            
             //NO BORRAR >:v
             ArrayList<INIC> nics = m.getNetworks().getNics();
+            /*
             for(INIC controlador : nics){
                 System.out.println("Nombre: " + controlador.getNombre());
                 System.out.println("IPv4: " + Arrays.toString(controlador.getIPv4()));
                 System.out.println("MAC: " + controlador.getMacAdress());
             }
+            */
             //Testeando NICS - Uso Json:
             for (INIC controlador : nics)
                 System.out.println(controlador.toJson());

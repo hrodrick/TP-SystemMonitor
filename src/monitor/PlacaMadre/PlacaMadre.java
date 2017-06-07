@@ -5,6 +5,7 @@
  */
 package monitor.PlacaMadre;
 
+import org.json.JSONStringer;
 import oshi.hardware.ComputerSystem;
 
 /**
@@ -32,9 +33,16 @@ public abstract class PlacaMadre implements MotherBoard{
     
     @Override
     public String toJson() {             
+        /*Forma Chota y vieja
+        String Json = "{\"Marca Placa madre \":\"" + ""+this.getMarcaMother()+"\","             
+                + "\"Modelo placa madre \":\"" + ""+this.getModeloMother()+"\"}";
+        */
         
-        String Json = "{\"Marca Placa madre \":" + this.getMarcaMother()                
-                + "\"Modelo placa madre \":" + this.getModeloMother()+"}";
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Marca").value(this.getMarcaMother())
+                .key("Modelo").value(this.getModeloMother())                
+                .endObject().toString();
         
         return Json;
     }

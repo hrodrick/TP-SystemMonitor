@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package monitor.SistemaOperativo;
+import org.json.JSONStringer;
 import oshi.software.common.AbstractOperatingSystem;
 /**
  *
@@ -37,13 +38,21 @@ public abstract class OS implements OperativeSys{
     }
     
     @Override
-    public String toJson() {                      
+    public String toJson() {           
         
-        String Json = "{\"Fabricante SO \":" + this.getFabricanteOS()
-                + "\"Familia SO \":" + this.getFamiliaOS()
-                + "\"Version SO \":" + this.getVersionOS()
-                + "\"Edicion SO \":" + this.getVersionOS()+"}";
-        
+        /*Memoria chota y vieja
+        String Json = "{\"Fabricante SO \":\""+this.getFabricanteOS()+"\","
+                + "\"Familia SO \":\"" +this.getFamiliaOS()+"\","
+                + "\"Version SO \":\"" +this.getVersionOS()+"\","
+                + "\"Edicion SO \":\"" +this.getEdicionOS()+"\"}";
+        */
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Familia").value(this.getFamiliaOS())
+                .key("Facribante").value(this.getFabricanteOS())
+                .key("Edicion").value(this.getEdicionOS())               
+                .key("Version").value(this.getVersionOS())               
+                .endObject().toString();
         return Json;
     }
     

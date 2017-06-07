@@ -1,6 +1,7 @@
 package monitor.Sensores;
 
 
+import org.json.JSONStringer;
 import oshi.hardware.Sensors;
 
 public abstract class Sensores implements ISensores{
@@ -28,18 +29,28 @@ public abstract class Sensores implements ISensores{
     }
 
     @Override
-    public String toJson() {
-        
+    public String toJson() {        
+        /*Forma chota y vieja
         int fansSpeed[] = this.getVelVentiladores();
-        String ventilador = "\"Velocidad Ventilador\":";
-        for(int i : fansSpeed ){
-            ventilador += i +": " + String.valueOf(i);            
+        String ventilador = "\"Velocidad Ventilador\":["+"";
+        for(int i : fansSpeed ){            
+            ventilador += i+", " + String.valueOf(i);           
         }
-        String Json = "{\"Temperatura CPU \":" + Math.round(this.getTempCPU())
-                + "\"Voltaje CPU \":" + this.getVoltajeCPU()
+            ventilador+="]";
+        String Json = "{\"Temperatura CPU \":\""+Math.round(this.getTempCPU())+"\","
+                + "\"Voltaje CPU \":\""+this.getVoltajeCPU()+"\","
                 + ventilador + "}";
-
+        */
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Temperatura").value(this.getTempCPU())
+                .key("Voltaje").value(this.getVoltajeCPU())
+                .key("Ventiladores").value(this.getVelVentiladores())
+                .endObject().toString();
+        
         return Json;
     }
 
 }
+
+

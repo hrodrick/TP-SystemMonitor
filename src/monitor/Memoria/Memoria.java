@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package monitor.Memoria;
+import org.json.JSONStringer;
 import oshi.hardware.common.AbstractGlobalMemory;
 
 
@@ -44,14 +45,25 @@ public abstract class Memoria implements IMemoria{
         return  (this.memory.getSwapTotal() - this.memory.getSwapUsed());
     }
     @Override
-    public String toJson() {       
+    public String toJson() {    
         
-        String Json = "{\"Memoria RAM total \":" + this.getMemFisicaTotal()
-                + "\"Memoria RAM usada \":" + this.getMemFisicaUso()
-                + "\"Memoria RAM disponible \":" + this.getMemFisicaDisponible()
-                + "\"Memoria de intercambio total \":" + this.getMemSwapTotal()
-                + "\"Memoria de intercambio usada\":" + this.getMemSwapUso()
-                + "\"Memoria de intercambio disponible\":" + this.getMemSwapDisponible()+"}";
+        /*Forma chota y vieja
+        String Json = "{\"Memoria RAM total \":\"" +this.getMemFisicaTotal()+"\","
+                + "\"Memoria RAM usada \":\"" +this.getMemFisicaUso()+"\","
+                + "\"Memoria RAM disponible \":\"" +this.getMemFisicaDisponible()+"\","
+                + "\"Memoria de intercambio total \":\"" +this.getMemSwapTotal()+"\","
+                + "\"Memoria de intercambio usada\":\"" + this.getMemSwapUso()+"\","
+                + "\"Memoria de intercambio disponible\":\"" +this.getMemSwapDisponible()+"\"}";
+        */
+        JSONStringer js = new JSONStringer();
+        String Json = js.object()
+                .key("Memoria fisica disponible").value(this.getMemFisicaDisponible())
+                .key("Memoria fisica total").value(this.getMemFisicaTotal())
+                .key("Memoria fisica en uso").value(this.getMemFisicaUso())
+                .key("Memoria swap disponible").value(this.getMemSwapDisponible())
+                .key("Memoria swap en uso").value(this.getMemSwapUso())
+                .key("Memoria swap total").value(this.getMemSwapTotal())
+                .endObject().toString();
         
         return Json;
     }   

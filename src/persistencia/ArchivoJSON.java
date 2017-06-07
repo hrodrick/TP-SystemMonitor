@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 public class ArchivoJSON {
 
-    private static FileWriter file;
+    private static FileWriter file;            
 
     /**
      * Escribe la cadena JSON en el archivo
@@ -37,16 +37,12 @@ public class ArchivoJSON {
                 // Nuevamente aprovechamos el finally para 
                 // asegurarnos que se cierra el fichero.
                 if (null != file) {
-                    file.close();                    
+                    file.close();
                 }
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
         }
-        /*
-        ....
-         */
-
     }
 
     /**

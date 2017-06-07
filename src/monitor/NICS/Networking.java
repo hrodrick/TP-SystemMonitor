@@ -7,6 +7,7 @@ package monitor.NICS;
 
 
 import java.util.ArrayList;
+import org.json.JSONStringer;
 import oshi.hardware.NetworkIF;
 import oshi.hardware.common.AbstractNetworks;
 
@@ -35,7 +36,13 @@ public abstract class Networking implements INetworking{
     
     @Override
     public String toJson() {
-        String json = null;
+        JSONStringer js = new JSONStringer();
+        
+        for(INIC i : nics){
+            js.value(i.toJson());
+        }
+        String json=js.endArray().toString();        
+        
         return json;
     }
     
