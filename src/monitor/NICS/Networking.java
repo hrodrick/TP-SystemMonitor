@@ -11,10 +11,6 @@ import org.json.JSONStringer;
 import oshi.hardware.NetworkIF;
 import oshi.hardware.common.AbstractNetworks;
 
-/**
- *
- * @author Rodrigo Soria
- */
 public abstract class Networking implements INetworking{
     
     private AbstractNetworks networks;
@@ -35,13 +31,12 @@ public abstract class Networking implements INetworking{
     
     
     @Override
-    public String toJson() {
-        JSONStringer js = new JSONStringer();
-        
+    public String toJson() {                
+        JSONStringer js = new JSONStringer();        
         for(INIC i : nics){
             js.value(i.toJson());
         }
-        String json=js.endArray().toString();        
+        String json=js.endArray().toString();              
         
         return json;
     }

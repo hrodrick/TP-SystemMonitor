@@ -26,7 +26,8 @@ public class Testing {
             }
         }
         
-        private static void test(Monitor m){
+        private static void test(Monitor m){            
+            /*
             System.out.println(m.getMicro().toJson());            
             //Tester de Rodrigo soria. -testeando modificado por Mischuk por los JSON
             //TesteandoMemoria
@@ -37,8 +38,7 @@ public class Testing {
             System.out.println(m.getSensores().toJson());
             //Testeando PlacaMadre
             System.out.println(m.getPlacaMadre().toJson());  
-            //Testeando NICS - Uso basico-practico
-            
+            //Testeando NICS - Uso basico-practico            
             //NO BORRAR >:v
             ArrayList<INIC> nics = m.getNetworks().getNics();
             /*
@@ -47,10 +47,13 @@ public class Testing {
                 System.out.println("IPv4: " + Arrays.toString(controlador.getIPv4()));
                 System.out.println("MAC: " + controlador.getMacAdress());
             }
-            */
+            
             //Testeando NICS - Uso Json:
             for (INIC controlador : nics)
                 System.out.println(controlador.toJson());
+            */            
+               
+            System.out.println(m.toJson());
             
             
         }

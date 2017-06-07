@@ -9,6 +9,7 @@ import monitor.NICS.INetworking;
 import monitor.PlacaMadre.MotherBoard;
 import monitor.Sensores.ISensores;
 import monitor.SistemaOperativo.OperativeSys;
+import org.json.JSONStringer;
 
 
 public abstract class Monitor implements JSONSerializable{
@@ -29,7 +30,8 @@ public abstract class Monitor implements JSONSerializable{
         this.sistemaOperativo = sistemaOperativo;
         this.sensores = sensores;
         this.motherBoard = placaMadre;
-        this.NICS = nics;
+        this.NICS = nics;                   
+        
     }
     
     public ICPU getMicro() {
@@ -54,9 +56,20 @@ public abstract class Monitor implements JSONSerializable{
     }
     @Override
     public String toJson() {        
+        
         //TODO: debera retornar un String que sean todos los serializables juntos.
-        //Serializables deben de ser todos los String de todos los TOJSON de los objetos del monitor.
-        String Json = null;
+        //Serializables deben de ser todos los String de todos los TOJSON de los objetos del monitor.                        
+        JSONStringer js = new JSONStringer();                
+        String Json = js.object()
+                        .key("Procesador").value(this.micro.toJson())                                                
+                        .key("Memoria").value(this.memory.toJson())
+                        .key("Sensores").value(this.sensores.toJson())
+                        .key("Sistema Operativo").value(this.sistemaOperativo.toJson())
+                        .key("Placa Madre").value(this.motherBoard.toJson())
+                        //.key("NICS").value(this.NICS.toJson())
+                        .endObject().toString();        
+        
+        
         return Json;
     }
 }
