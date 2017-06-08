@@ -5,9 +5,14 @@
  */
 package ui;
 
+import java.awt.Component;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import monitor.Monitor;
 import monitor.MonitorWindows;
+import monitor.NICS.INIC;
 
 /**
  *
@@ -18,6 +23,8 @@ public class UserInterface extends javax.swing.JFrame {
     
     public UserInterface() {
         initComponents();
+        jTextArea1.setEditable(false);
+        jTextArea2.setEditable(false);
     }
     public UserInterface(Monitor m) {
         this();
@@ -42,6 +49,12 @@ public class UserInterface extends javax.swing.JFrame {
         lblRAMTotal.setText(Long.toString(monitor.getMemoria().getMemFisicaTotal()/1024/1024)+"mb");
         lblMemoriaSwapTot.setText(Long.toString(monitor.getMemoria().getMemSwapTotal()/1024/1024)+"mb");
         
+        //Esta funcion agrega toda la informacion de networks a un text area
+        cargarNIC(monitor.getNetworks().getNics());
+        
+        cargarVelVentiladores(monitor.getSensores().getVelVentiladores());
+        
+        
     }
     
     
@@ -61,8 +74,33 @@ public class UserInterface extends javax.swing.JFrame {
         return sliderFrecuencia.getValue();
     }
     
+    public void cargarNIC(ArrayList<INIC> nics){
+        jTextArea1.setText("");
+        for (int i = 0; i < nics.size(); i++) {
+            jTextArea1.setText(jTextArea1.getText()+"Nombre: "+nics.get(i).getNombre()+"\n");
+            
+            jTextArea1.setText(jTextArea1.getText()+"MacAdress: "+nics.get(i).getMacAdress()+"\n");
+            
+            String ipv4[]=nics.get(i).getIPv4();
+            
+            for (int j = 0; j < ipv4.length; j++) {
+                jTextArea1.setText(jTextArea1.getText()+"ipv4: "+ipv4[j]+"\n");
+            }
+            
+            jTextArea1.setText(jTextArea1.getText()+"-----------------------------"+"\n");
+            
+        }
+        
+        
+    }
     
-    
+    public void cargarVelVentiladores(int vel[])
+    {
+        jTextArea2.setText("");
+        for (int i = 0; i < vel.length; i++) {
+            jTextArea2.setText("\nventilador 1: "+vel[i]);
+        }
+    }
     
     
     /**
@@ -100,6 +138,8 @@ public class UserInterface extends javax.swing.JFrame {
         lblCpuMarca = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanelMotherMemoria = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -129,6 +169,8 @@ public class UserInterface extends javax.swing.JFrame {
         lblUsoRam = new javax.swing.JLabel();
         jPanelCoolers = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanelSlider = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         sliderFrecuencia = new javax.swing.JSlider();
@@ -287,21 +329,31 @@ public class UserInterface extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel22.setText("Controladores  de red");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(0, 187, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -485,8 +537,14 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelCoolers.setEnabled(false);
+
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel21.setText("Velocidad de los ventiladores");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane1.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanelCoolersLayout = new javax.swing.GroupLayout(jPanelCoolers);
         jPanelCoolers.setLayout(jPanelCoolersLayout);
@@ -494,14 +552,17 @@ public class UserInterface extends javax.swing.JFrame {
             jPanelCoolersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCoolersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21)
+                .addGroup(jPanelCoolersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCoolersLayout.setVerticalGroup(
             jPanelCoolersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCoolersLayout.createSequentialGroup()
                 .addComponent(jLabel21)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
         );
 
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -644,6 +705,10 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMotherMemoria;
     private javax.swing.JPanel jPanelSOCPU;
     private javax.swing.JPanel jPanelSlider;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblCpuArquitectura;
     private javax.swing.JLabel lblCpuFamilia;
     private javax.swing.JLabel lblCpuMarca;
