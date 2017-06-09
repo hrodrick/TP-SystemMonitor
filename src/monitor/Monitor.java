@@ -13,7 +13,6 @@ import org.json.JSONStringer;
 
 
 public abstract class Monitor implements JSONSerializable{
-    //TODO: ESTOS OBJETOS DEBEN SER DEL TIPO DE LA INTERFAZ. NO DE LA CLASE. A su vez renombrar las demas clases
     private ICPU micro;
     private IMemoria memory;
     private OperativeSys sistemaOperativo;

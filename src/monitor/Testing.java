@@ -54,8 +54,7 @@ public class Testing {
             System.out.println(m.getSensores().toJson());
             //Testeando PlacaMadre
             System.out.println(m.getPlacaMadre().toJson());  
-            //Testeando NICS - Uso basico-practico
-            //NO BORRAR >:v
+            //Testeando NICS - Uso basico-practico            
             ArrayList<INIC> nics = m.getNetworks().getNics();
             for(INIC controlador : nics){
                 System.out.println("Nombre: " + controlador.getNombre());
@@ -66,7 +65,7 @@ public class Testing {
             for (INIC controlador : nics)
                 System.out.println(controlador.toJson());
             */
-            
+            //Testeando Monitor.toJson
             //System.out.println(m.toJson());
             
             
