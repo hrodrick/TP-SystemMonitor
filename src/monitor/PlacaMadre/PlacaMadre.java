@@ -33,11 +33,6 @@ public abstract class PlacaMadre implements MotherBoard {
 
     @Override
     public String toJson() {
-        /*Forma Chota y vieja
-        String Json = "{\"Marca Placa madre \":\"" + ""+this.getMarcaMother()+"\","             
-                + "\"Modelo placa madre \":\"" + ""+this.getModeloMother()+"\"}";
-         */
-
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Marca").value(this.getMarcaMother())
@@ -50,7 +45,7 @@ public abstract class PlacaMadre implements MotherBoard {
     @Override
     public String toConsoleString() {
         String result = "Placa madre: "
-                + "\nMarca:" + getMarcaMother()
+                + "\nMarca: " + getMarcaMother()
                 + "\nModelo Placa madre: " + getModeloMother();
         return result;
     }
