@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import monitor.NICS.INIC;
 import oshi.SystemInfo;
@@ -17,7 +15,6 @@ public class Testing {
     public static void main(String[] args) throws InterruptedException {
         boolean guiIsOn = false;
         Monitor m;
-
         // En el Hashmap guardare la información de los parámetros de 
         // ejecución del programa.
         HashMap<String, String> argumentos = argumentsSet(args);
@@ -31,12 +28,14 @@ public class Testing {
         }
 
         // Se seleccionará el monitor correspondiente al Sistema operativo.
+        // Y se creará un displayer concreto para este monitor.
         m = monitorSelection();
-
+        Displayer display = new Displayer(m);
+        
         // Si no hay monitor para su sistema operativo el programa 
         // debería finalizar sin ningún problema.
         if (m != null) {
-            displaySelection(m, guiIsOn);
+            display.displaySelection(guiIsOn);
         }
 
     }
@@ -70,14 +69,6 @@ public class Testing {
         return m;
     }
 
-    private static void displaySelection(Monitor m, boolean guiIsOn) throws InterruptedException {
-        if (guiIsOn) {
-            display_graphic(m);
-        } else {
-            display_console(m);
-        }
-    }
-
     private static void JsonTest(Monitor m) {
         System.out.println(m.getMicro().toJson());
         //Tester de Rodrigo soria. -testeando modificado por Mischuk por los JSON
@@ -106,59 +97,5 @@ public class Testing {
         //System.out.println(m.toJson());
     }
 
-    private static void display_console(Monitor m) throws InterruptedException {
-        System.out.println(m.toConsoleString()
-                + "\n\no--------------------------------o\n"
-                + "Desea una sucesion de datos en tiempo real? S/N + enter (Se mostraran 10 lecturas a 2 seg. cada una)\n");
-        Scanner lector = new Scanner(System.in);
-        String option = lector.next();
-        if (option.equalsIgnoreCase("s")) {
-            display_ConsoleActualizable(m);
-        }
-        
-        System.out.println("Desea exportar la información del sistema actual a un archivo de texto?. S/N + enter");
-        option = lector.next();
-        
-        if (option.equalsIgnoreCase("s")) {
-            //Abro el archivo y lo uso dentro de un try-catch para informar sobre una posible excepción por consola.
-            ArchivoJSON archi = new ArchivoJSON();
-            try {
-                archi.escribir(m.toJson()); //TODO: Test this.
-                System.out.println("Archivo guardado."); //Si la operación falló este texto no debería mostrarte.
-            } catch (IOException ex) {
-                System.err.println("Operación de entrada/salida del archivo interrumpida o incorrecta.");
-            }
-        }
-        
-    }
-
-    private static void display_ConsoleActualizable(Monitor m) throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(m.toConsoleStringActualizable());
-            Thread.sleep(2000);
-            i++;
-        }
-    }
-
-    private static void display_graphic(Monitor m) throws InterruptedException {
-        UserInterface gui = construirGUI(m);
-        gui.setVisible(true);
-
-        while (true) {
-            //Actualiza los datos constantemente.
-            gui.actualizarDatosSensorYCarga();
-
-            // pone el poner el hilo actual en pausa
-            // por el tiempo que se necesite en milisegundos
-            Thread.sleep(gui.getFrecuenciaActualizacion() * 20); //Hasta 2 segundos de retardo
-        }
-    }
-
-    private static UserInterface construirGUI(Monitor monitor) {
-        UserInterface UI = new UserInterface(monitor);
-        UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        UI.setSize(1024, 600);
-        return UI;
-    }
 
 }
