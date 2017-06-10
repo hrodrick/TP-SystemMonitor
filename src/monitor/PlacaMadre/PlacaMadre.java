@@ -12,7 +12,7 @@ import oshi.hardware.ComputerSystem;
  *
  * @author Rodrigo Soria
  */
-public abstract class PlacaMadre implements MotherBoard{
+public abstract class PlacaMadre implements MotherBoard {
 
     private ComputerSystem sistema;
 
@@ -30,22 +30,28 @@ public abstract class PlacaMadre implements MotherBoard{
     public String getModeloMother() {
         return sistema.getBaseboard().getModel();
     }
-    
+
     @Override
-    public String toJson() {             
+    public String toJson() {
         /*Forma Chota y vieja
         String Json = "{\"Marca Placa madre \":\"" + ""+this.getMarcaMother()+"\","             
                 + "\"Modelo placa madre \":\"" + ""+this.getModeloMother()+"\"}";
-        */
-        
+         */
+
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Marca").value(this.getMarcaMother())
-                .key("Modelo").value(this.getModeloMother())                
+                .key("Modelo").value(this.getModeloMother())
                 .endObject().toString();
-        
+
         return Json;
     }
 
-
+    @Override
+    public String toConsoleString() {
+        String result = "Placa madre: "
+                + "\nMarca:" + getMarcaMother()
+                + "\nModelo Placa madre: " + getModeloMother();
+        return result;
+    }
 }

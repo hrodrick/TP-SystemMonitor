@@ -4,20 +4,22 @@
  * and open the template in the editor.
  */
 package monitor.SistemaOperativo;
+
 import org.json.JSONStringer;
 import oshi.software.common.AbstractOperatingSystem;
+
 /**
  *
  * @author Rodrigo Soria
  */
-public abstract class OS implements OperativeSys{
-    
+public abstract class OS implements OperativeSys {
+
     private AbstractOperatingSystem opSystem;
-    
-    public OS(AbstractOperatingSystem opSystem){
+
+    public OS(AbstractOperatingSystem opSystem) {
         this.opSystem = opSystem;
     }
-    
+
     @Override
     public String getFamiliaOS() {
         return opSystem.getFamily();
@@ -32,29 +34,32 @@ public abstract class OS implements OperativeSys{
     public String getFabricanteOS() {
         return opSystem.getManufacturer();
     }
+
     @Override
-    public String getEdicionOS(){
+    public String getEdicionOS() {
         return opSystem.getVersion().getCodeName();
     }
-    
+
     @Override
-    public String toJson() {           
-        
-        /*Memoria chota y vieja
-        String Json = "{\"Fabricante SO \":\""+this.getFabricanteOS()+"\","
-                + "\"Familia SO \":\"" +this.getFamiliaOS()+"\","
-                + "\"Version SO \":\"" +this.getVersionOS()+"\","
-                + "\"Edicion SO \":\"" +this.getEdicionOS()+"\"}";
-        */
+    public String toJson() {
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Familia").value(this.getFamiliaOS())
                 .key("Facribante").value(this.getFabricanteOS())
-                .key("Edicion").value(this.getEdicionOS())               
-                .key("Version").value(this.getVersionOS())               
+                .key("Edicion").value(this.getEdicionOS())
+                .key("Version").value(this.getVersionOS())
                 .endObject().toString();
         return Json;
     }
-    
-    
+
+    @Override
+    public String toConsoleString() {
+        String result = "Sistema operativo: " + getFamiliaOS()
+                + "\nFabricante: " + getFabricanteOS()
+                + "\nEdicion: " + getEdicionOS()
+                + "\nVersion: " + getVersionOS();
+
+        return result;
+    }
+
 }

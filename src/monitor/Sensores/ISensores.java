@@ -5,13 +5,15 @@
  */
 package monitor.Sensores;
 
+import monitor.ConsolePrinteableActualizable;
 import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface ISensores extends JSONSerializable{
+public interface ISensores extends JSONSerializable,
+                                   ConsolePrinteableActualizable{ //Ejemplo claro de interfaz que sólo posee métodos actualizables.
     public Double getTempCPU();
     public Double getVoltajeCPU();
     public int[] getVelVentiladores();

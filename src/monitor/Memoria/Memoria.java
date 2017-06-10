@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 package monitor.Memoria;
+
 import org.json.JSONStringer;
 import oshi.hardware.common.AbstractGlobalMemory;
 
+public abstract class Memoria implements IMemoria {
 
-public abstract class Memoria implements IMemoria{
     private AbstractGlobalMemory memory;
-    
-    public Memoria(AbstractGlobalMemory a){
+
+    public Memoria(AbstractGlobalMemory a) {
         this.memory = a;
     }
 
@@ -42,11 +43,12 @@ public abstract class Memoria implements IMemoria{
 
     @Override
     public long getMemSwapDisponible() {
-        return  (this.memory.getSwapTotal() - this.memory.getSwapUsed());
+        return (this.memory.getSwapTotal() - this.memory.getSwapUsed());
     }
+
     @Override
-    public String toJson() {    
-        
+    public String toJson() {
+
         /*Forma chota y vieja
         String Json = "{\"Memoria RAM total \":\"" +this.getMemFisicaTotal()+"\","
                 + "\"Memoria RAM usada \":\"" +this.getMemFisicaUso()+"\","
@@ -54,7 +56,7 @@ public abstract class Memoria implements IMemoria{
                 + "\"Memoria de intercambio total \":\"" +this.getMemSwapTotal()+"\","
                 + "\"Memoria de intercambio usada\":\"" + this.getMemSwapUso()+"\","
                 + "\"Memoria de intercambio disponible\":\"" +this.getMemSwapDisponible()+"\"}";
-        */
+         */
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Memoria fisica disponible").value(this.getMemFisicaDisponible())
@@ -64,8 +66,27 @@ public abstract class Memoria implements IMemoria{
                 .key("Memoria swap en uso").value(this.getMemSwapUso())
                 .key("Memoria swap total").value(this.getMemSwapTotal())
                 .endObject().toString();
-        
+
         return Json;
-    }   
-    
+    }
+
+    @Override
+    public String toConsoleString() {
+        String result = "Memoria del sistema: "
+                + "\nMemoria RAM total: " + getMemFisicaTotal()
+                + "\nMemoria SWAP total: " + getMemSwapTotal();
+
+        return result;
+    }
+
+    @Override
+    public String toConsoleStringActualizable() {
+        String result = "Uso de RAM: " + getMemFisicaUso()
+                + "\nRAM disponible : " + getMemFisicaDisponible()
+                + "\nSWAP en uso: " + getMemSwapUso()
+                + "\nSWAP disponible: " + getMemSwapDisponible();
+
+        return result;
+    }
+
 }

@@ -61,6 +61,16 @@ public class NIC implements INIC{
         
         return Json;
     }
+
+    @Override
+    public String toConsoleString() {
+        String result = "Nombre: " + getNombre()+
+                        "\nIPv4: " + Arrays.toString(getIPv4())+
+                        "\nMAC: " + getMacAdress()+
+                        "\n-----";
+        
+        return result;
+    }
     
     
     
