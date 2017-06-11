@@ -6,8 +6,11 @@
 package ui;
 
 import java.awt.Component;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
@@ -15,6 +18,7 @@ import javax.swing.plaf.BorderUIResource;
 import monitor.Monitor;
 import monitor.MonitorWindows;
 import monitor.NICS.INIC;
+import persistencia.ArchivoJSON;
 
 /**
  *
@@ -135,6 +139,7 @@ public class UserInterface extends javax.swing.JFrame {
         lblCpuModelo = new javax.swing.JLabel();
         lblCpuFamilia = new javax.swing.JLabel();
         lblCpuMarca = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -226,6 +231,13 @@ public class UserInterface extends javax.swing.JFrame {
 
         lblCpuMarca.setText("Vendor");
 
+        jButton1.setText("Exportar a .json");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSOCPULayout = new javax.swing.GroupLayout(jPanelSOCPU);
         jPanelSOCPU.setLayout(jPanelSOCPULayout);
         jPanelSOCPULayout.setHorizontalGroup(
@@ -270,7 +282,10 @@ public class UserInterface extends javax.swing.JFrame {
                                         .addComponent(lblCpuArquitectura))))))
                     .addGroup(jPanelSOCPULayout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6))
+                    .addGroup(jPanelSOCPULayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanelSOCPULayout.setVerticalGroup(
@@ -322,7 +337,9 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(jPanelSOCPULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(lblCpuArquitectura))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -629,7 +646,18 @@ public class UserInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArchivoJSON archivo = new ArchivoJSON();
+        try {
+            archivo.escribir(monitor.toJson());
+            System.out.println("Exportado correctamente");
+        } catch (IOException ex) {
+            System.out.println("Error al exportar el archivo");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
