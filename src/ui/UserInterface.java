@@ -8,7 +8,9 @@ package ui;
 import java.awt.Component;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -652,7 +654,8 @@ public class UserInterface extends javax.swing.JFrame {
         String directorio = JOptionPane.showInputDialog("Donde desea guardar el archivo? ");
         
         try {
-            archivo.escribir(monitor.toJson(),directorio );
+            String fecha = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss").format(new Date());
+            archivo.escribir(monitor.toJson(),directorio+"SystemInfo" + fecha+".txt");
             System.out.println("Exportado correctamente");
         } catch (IOException ex) {
             System.out.println("Error al exportar el archivo");
