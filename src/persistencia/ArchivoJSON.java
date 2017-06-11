@@ -17,7 +17,7 @@ public class ArchivoJSON {
      * @param cadenaJson
      * @throws IOException
      */
-    public void escribir(String cadenaJson) throws IOException {
+    public void escribir(String cadenaJson, String directorio) throws IOException {
         this.abrir();        
         ///Ejemplo de: http://chuwiki.chuidiang.org/index.php?title=Lectura_y_Escritura_de_Ficheros_en_Java ver ahi
         //FileWriter fichero = null;
@@ -26,7 +26,7 @@ public class ArchivoJSON {
             
             //fichero = new FileWriter("c:/prueba.txt");
             //pw = new PrintWriter(fichero);
-            file = new FileWriter("c:/prueba.txt");
+            file = new FileWriter(directorio);
             pw = new PrintWriter(file);
             pw.print(cadenaJson);            
 

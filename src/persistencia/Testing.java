@@ -30,7 +30,7 @@ public class Testing {
         obj.put("Sensores", m.getSensores().toJson());       
         
         ArchivoJSON archivo = new ArchivoJSON();
-        archivo.escribir(obj.toString());
+        archivo.escribir(obj.toString(), "c:/prueba.txt");
         
         System.out.print(obj);
         ///---------------------------------------------------

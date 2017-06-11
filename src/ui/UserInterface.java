@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
@@ -648,8 +649,10 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ArchivoJSON archivo = new ArchivoJSON();
+        String directorio = JOptionPane.showInputDialog("Donde desea guardar el archivo? ");
+        
         try {
-            archivo.escribir(monitor.toJson());
+            archivo.escribir(monitor.toJson(),directorio );
             System.out.println("Exportado correctamente");
         } catch (IOException ex) {
             System.out.println("Error al exportar el archivo");
