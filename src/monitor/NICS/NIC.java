@@ -32,32 +32,27 @@ public class NIC implements INIC{
     public String getNombre(){
         return controladorRed.getName();
     }
+    @Override
+    public long getBytesEnviados(){
+        controladorRed.updateNetworkStats();
+        return controladorRed.getBytesSent();
+    }
+    @Override
+    public long getBytesRecibidos(){
+        controladorRed.updateNetworkStats();
+        return controladorRed.getBytesRecv();
+    }
 
     @Override
     public String toJson() {         
-        
-        /*Forma Vieja y chota
-        String IPs[] = this.getIPv4();
-        String IPv4 = "\"IPv4\":\"" ;
-        for(int i=0;i<IPs.length;i++){
-            //if(i!=IPs.length)
-            IPv4 += i+", " + IPs[i];
-            //else
-            //IPv4 += i+ IPs[i];           
-        }   
-        
-        String Json = "{\"Nombre\":\"" +this.getNombre()+"\","                
-                + "\"MAC\":\"" +this.getMacAdress()+"\","
-                + IPv4 +"\"}";
-        */        
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Nombre").value(this.getNombre())
                 .key("IPv4").value(this.getIPv4())
                 .key("MAC").value(this.getMacAdress())
+                .key("BytesEnviados").value(this.getBytesEnviados())
+                .key("BytesRecibidos").value(this.getBytesRecibidos())
                 .endObject().toString();
-        
-        
         
         return Json;
     }
@@ -68,10 +63,15 @@ public class NIC implements INIC{
                         "\nIPv4: " + Arrays.toString(getIPv4())+
                         "\nMAC: " + getMacAdress()+
                         "\n-----";
-        
         return result;
     }
-    
+    @Override
+    public String toConsoleStringActualizable(){
+        String result = "\nBytes enviados: " + getBytesEnviados()+
+                        "\nBytes recibidos: " + getBytesRecibidos()+
+                        "\n-----";
+        return result;
+    }
     
     
 }

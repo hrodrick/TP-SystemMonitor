@@ -7,6 +7,8 @@ package monitor;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import persistencia.ArchivoJSON;
 import ui.UserInterface;
@@ -25,7 +27,7 @@ public class Displayer {
 
     public Displayer(Monitor m) {
         this.m = m;
-        this.guiIsOn = false;
+        this.guiIsOn = true;
         refresco = 500;
         duracion = 10;
         rutaJson = "C:\\datosSistema.JSON";
@@ -56,9 +58,12 @@ public class Displayer {
     }
 
     private void display_console() throws InterruptedException {
+        display_imprimir();
         System.out.println(m.toConsoleString()
+                + m.toConsoleStringActualizable()
                 + "\n--------------------------------o\n"
-                + "Desea una sucesion de datos en tiempo real? S/N + enter (Se mostraran 10 lecturas a 2 seg. cada una)\n");
+                + "Desea una sucesion de datos en tiempo real? S/N + enter\n");
+        
         Scanner lector = new Scanner(System.in);
         String option = lector.next();
         if (option.equalsIgnoreCase("s")) {
@@ -75,6 +80,11 @@ public class Displayer {
         }
     }
 
+    private void display_imprimir(){
+        ArchivoJSON archi = new ArchivoJSON();
+        archi.escribir(m.toJson(), rutaJson);
+    }
+    
     private void display_graphic() throws InterruptedException {
         UserInterface gui = construirGUI();
         gui.setVisible(true);

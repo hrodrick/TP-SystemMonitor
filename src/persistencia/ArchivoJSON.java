@@ -1,12 +1,9 @@
 package persistencia;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 public class ArchivoJSON {
 
     private static FileWriter file;            
@@ -15,32 +12,29 @@ public class ArchivoJSON {
      * Escribe la cadena JSON en el archivo
      *
      * @param cadenaJson
-     * @throws IOException
+     * @param directorio
      */
-    public void escribir(String cadenaJson, String directorio) throws IOException {
-        this.abrir();        
-        ///Ejemplo de: http://chuwiki.chuidiang.org/index.php?title=Lectura_y_Escritura_de_Ficheros_en_Java ver ahi
-        //FileWriter fichero = null;
+    public void escribir(String cadenaJson, String directorio){
+        this.abrir();
         PrintWriter pw = null;
+        
         try {
-            
-            //fichero = new FileWriter("c:/prueba.txt");
-            //pw = new PrintWriter(fichero);
             file = new FileWriter(directorio);
             pw = new PrintWriter(file);
             pw.print(cadenaJson);            
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        } catch (IOException e) {
+            System.err.println("Error al guardar el archivo.");
+        }
+        finally {
             try {
-                // Nuevamente aprovechamos el finally para 
+                // aprovechamos el finally para 
                 // asegurarnos que se cierra el fichero.
-                if (null != file) {
+                if (file != null) {
                     file.close();
                 }
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            } catch (IOException e2) {
+                System.err.println("Error al cerrar el archivo");
             }
         }
     }

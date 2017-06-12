@@ -5,21 +5,13 @@
  */
 package ui;
 
-import java.awt.Component;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
-import javax.swing.border.Border;
-import javax.swing.plaf.BorderUIResource;
 import monitor.Monitor;
-import monitor.MonitorWindows;
 import monitor.NICS.INIC;
 import persistencia.ArchivoJSON;
 
@@ -28,18 +20,20 @@ import persistencia.ArchivoJSON;
  * @author Rodrigo Soria
  */
 public class UserInterface extends javax.swing.JFrame {
+
     Monitor monitor;
-    
+
     public UserInterface() {
         initComponents();
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
     }
+
     public UserInterface(Monitor m) {
         this();
         this.monitor = m;
         //MICRO 
-        lblCpuArquitectura.setText(monitor.getMicro().esDe64Bits()? "x64":"x86");
+        lblCpuArquitectura.setText(monitor.getMicro().esDe64Bits() ? "x64" : "x86");
         lblCpuMarca.setText(monitor.getMicro().getFabricanteCPU());
         lblCpuModelo.setText(monitor.getMicro().getModeloCPU());
         lblCpuNucleosFisicos.setText(Integer.toString(monitor.getMicro().getNucleosFisicosCPU()));
@@ -55,60 +49,59 @@ public class UserInterface extends javax.swing.JFrame {
         lblOsEdicion.setText(monitor.getSistemaOperativo().getEdicionOS());
         lblOsFabricante.setText(monitor.getSistemaOperativo().getFabricanteOS());
         //MEMORIA
-        lblRAMTotal.setText(Long.toString(monitor.getMemoria().getMemFisicaTotal()/1024/1024)+"mb");
-        lblMemoriaSwapTot.setText(Long.toString(monitor.getMemoria().getMemSwapTotal()/1024/1024)+"mb");
-        
+        lblRAMTotal.setText(Long.toString(monitor.getMemoria().getMemFisicaTotal() / 1024 / 1024) + "mb");
+        lblMemoriaSwapTot.setText(Long.toString(monitor.getMemoria().getMemSwapTotal() / 1024 / 1024) + "mb");
+
         //Esta funcion agrega toda la informacion de networks a un text area
         cargarNIC(monitor.getNetworks().getNics());
-        
+
         cargarVelVentiladores(monitor.getSensores().getVelVentiladores());
-        
-        
+
     }
-    
-    
-    public void actualizarDatosSensorYCarga(){
-        
+
+    public void actualizarDatosSensorYCarga() {
+
         lblTempCpu.setText(monitor.getSensores().getTempCPU().shortValue() + "°C");
         DecimalFormat df = new DecimalFormat("0.00");
-        lblUsoCpu.setText(df.format(100*monitor.getMicro().getUsoActualCPU()) + "%");
-        lblCpuVoltaje.setText(df.format(100*monitor.getSensores().getVoltajeCPU()) + " W");
-        lblUsoRam.setText(String.valueOf(monitor.getMemoria().getMemFisicaUso()/1024/1024)+"mb");
-        lblUsoRamDisponible.setText(String.valueOf(monitor.getMemoria().getMemFisicaDisponible()/1024/1024)+"mb");
-        lblUsoSWAP.setText(String.valueOf(monitor.getMemoria().getMemSwapUso()/1024/1024)+"mb");
-        lblUsoSWAPDisponible.setText(String.valueOf(monitor.getMemoria().getMemSwapDisponible()/1024/1024)+"mb");
+        lblUsoCpu.setText(df.format(100 * monitor.getMicro().getUsoActualCPU()) + "%");
+        lblCpuVoltaje.setText(df.format(100 * monitor.getSensores().getVoltajeCPU()) + " W");
+        lblUsoRam.setText(String.valueOf(monitor.getMemoria().getMemFisicaUso() / 1024 / 1024) + "mb");
+        lblUsoRamDisponible.setText(String.valueOf(monitor.getMemoria().getMemFisicaDisponible() / 1024 / 1024) + "mb");
+        lblUsoSWAP.setText(String.valueOf(monitor.getMemoria().getMemSwapUso() / 1024 / 1024) + "mb");
+        lblUsoSWAPDisponible.setText(String.valueOf(monitor.getMemoria().getMemSwapDisponible() / 1024 / 1024) + "mb");
     }
-    
-    public Integer getFrecuenciaActualizacion(){
+
+    public Integer getFrecuenciaActualizacion() {
         return sliderFrecuencia.getValue();
     }
-    
-    public void cargarNIC(ArrayList<INIC> nics){
+
+    public void cargarNIC(ArrayList<INIC> nics) {
         jTextArea1.setText("");
         for (int i = 0; i < nics.size(); i++) {
-            jTextArea1.setText(jTextArea1.getText()+"Nombre: "+nics.get(i).getNombre()+"\n");
-            
-            jTextArea1.setText(jTextArea1.getText()+"MacAdress: "+nics.get(i).getMacAdress()+"\n");
-            
-            String ipv4[]=nics.get(i).getIPv4();
-            
+            jTextArea1.setText(jTextArea1.getText()
+                             + "Nombre: " + nics.get(i).getNombre()
+                             + "\nMacAdress: " + nics.get(i).getMacAdress());
+
+            String ipv4[] = nics.get(i).getIPv4();
+
             for (int j = 0; j < ipv4.length; j++) {
-                jTextArea1.setText(jTextArea1.getText()+"ipv4: "+ipv4[j]+"\n");
+                jTextArea1.setText(jTextArea1.getText() + "\nipv4: " + ipv4[j]);
             }
-            
-            jTextArea1.setText(jTextArea1.getText()+"-----------------------------"+"\n");
+
+            jTextArea1.setText(jTextArea1.getText()
+                            + "\nBytes enviados: " + nics.get(i).getBytesEnviados() / 1024 + "kb."
+                            + "\nBytes Recibidos: " + nics.get(i).getBytesRecibidos() / 1024 + "kb."
+                            + "\n-----------------------------" + "\n");
         }
     }
-    
-    public void cargarVelVentiladores(int vel[])
-    {
+
+    public void cargarVelVentiladores(int vel[]) {
         jTextArea2.setText("");
         for (int i = 0; i < vel.length; i++) {
-            jTextArea2.setText("\nventilador 1: "+vel[i]);
+            jTextArea2.setText("\nventilador 1: " + vel[i]);
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -652,14 +645,9 @@ public class UserInterface extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ArchivoJSON archivo = new ArchivoJSON();
         String directorio = JOptionPane.showInputDialog("Donde desea guardar el archivo? ");
-        
-        try {
-            String fecha = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss").format(new Date());
-            archivo.escribir(monitor.toJson(),directorio+"SystemInfo" + fecha+".txt");
-            System.out.println("Exportado correctamente");
-        } catch (IOException ex) {
-            System.out.println("Error al exportar el archivo");
-        }
+
+        String fecha = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss").format(new Date());
+        archivo.escribir(monitor.toJson(), directorio + "SystemInfo" + fecha + ".txt");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
