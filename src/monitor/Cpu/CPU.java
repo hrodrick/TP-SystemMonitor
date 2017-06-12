@@ -88,7 +88,7 @@ public abstract class CPU implements ICPU {
 
     @Override
     public String toConsoleStringActualizable() {
-        String result = "Uso de CPU: " + getUsoActualCPU();
+        String result = "Uso de CPU: " + getUsoActualCPU()+"%";
         return result;
     }
 

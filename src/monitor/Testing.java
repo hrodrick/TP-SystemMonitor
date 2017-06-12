@@ -1,45 +1,43 @@
 package monitor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
-import javax.swing.JFrame;
 import monitor.NICS.INIC;
 import oshi.SystemInfo;
-import persistencia.ArchivoJSON;
-import ui.UserInterface;
 
 public class Testing {
-
+        
     public static void main(String[] args) throws InterruptedException {
-        boolean guiIsOn = false;
         Monitor m;
         // En el Hashmap guardare la información de los parámetros de 
         // ejecución del programa.
         HashMap<String, String> argumentos = argumentsSet(args);
-
-        // si deseo ver la interfaz gráfica guiON sera true y será enviado a 
-        // "displaySelection" para que la gui se active.
-        if (argumentos.containsKey("gui")) {
-            if (argumentos.get("gui").equalsIgnoreCase("true")) {
-                guiIsOn = true;
-            }
-        }
 
         // Se seleccionará el monitor correspondiente al Sistema operativo.
         // Y se creará un displayer concreto para este monitor.
         m = monitorSelection();
         Displayer display = new Displayer(m);
         
+        // De acuerdo los comandos será como y que veré durante el programa. 
+        if (argumentos.containsKey("gui")) 
+                display.setGuiIsOn(Boolean.valueOf(argumentos.get("gui")));
+        if (argumentos.containsKey("refresco")) 
+                display.setRefresco(Integer.valueOf(argumentos.get("refresco")));
+        if (argumentos.containsKey("duracion")) 
+                display.setduracion(Integer.valueOf(argumentos.get("duracion")));
+        if (argumentos.containsKey("gui")) 
+                display.setDirectorio(argumentos.get("rutaJSON"));
+        
         // Si no hay monitor para su sistema operativo el programa 
         // debería finalizar sin ningún problema.
         if (m != null) {
-            display.displaySelection(guiIsOn);
+            display.displaySelection();
         }
 
     }
-
+    
+    
+    
     private static HashMap<String, String> argumentsSet(String[] args) {
         HashMap<String, String> argumentos = new HashMap<>();
         for (String a : args) {

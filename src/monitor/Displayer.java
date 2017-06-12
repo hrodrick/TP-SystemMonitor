@@ -16,21 +16,45 @@ import ui.UserInterface;
  * @author Rodrigo Soria
  */
 public class Displayer {
-    
-    Monitor m;
-    
-    public Displayer(Monitor m){
+
+    private Monitor m;
+    private boolean guiIsOn;
+    private int refresco; // intérvalo entre cada actualización
+    private int duracion; // duracion en segundos que durará la actualización de los datos.
+    private String rutaJson; //Path del archivo a escribir
+
+    public Displayer(Monitor m) {
         this.m = m;
+        this.guiIsOn = false;
+        refresco = 500;
+        duracion = 10;
+        rutaJson = "C:\\datosSistema.JSON";
     }
-    
-    public void displaySelection(boolean guiIsOn) throws InterruptedException {
+
+    public void setGuiIsOn(boolean isOn) {
+        guiIsOn = isOn;
+    }
+
+    public void setRefresco(int refresco) {
+        this.refresco = refresco;
+    }
+
+    public void setduracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setDirectorio(String dir) {
+        this.rutaJson = dir;
+    }
+
+    public void displaySelection() throws InterruptedException {
         if (guiIsOn) {
             display_graphic();
         } else {
             display_console();
         }
     }
-    
+
     private void display_console() throws InterruptedException {
         System.out.println(m.toConsoleString()
                 + "\n--------------------------------o\n"
@@ -40,28 +64,14 @@ public class Displayer {
         if (option.equalsIgnoreCase("s")) {
             display_ConsoleActualizable();
         }
-        
-        System.out.println("Desea exportar la información del sistema actual a un archivo de texto?. S/N + enter");
-        option = lector.next();
-        
-        if (option.equalsIgnoreCase("s")) {
-            //Abro el archivo y lo uso dentro de un try-catch para informar sobre una posible excepción por consola.
-            ArchivoJSON archi = new ArchivoJSON();
-            try {
-                archi.escribir(m.toJson()); //TODO: Test this.
-                System.out.println("Archivo guardado."); //Si la operación falló este texto no debería mostrarte.
-            } catch (IOException ex) {
-                System.err.println("Operación de entrada/salida del archivo interrumpida o incorrecta.");
-            }
-        }
-        
+
     }
 
     private void display_ConsoleActualizable() throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+        
+        for (int i = 0; i < duracion*1000; i += refresco) {
             System.out.println(m.toConsoleStringActualizable());
-            Thread.sleep(2000);
-            i++;
+            Thread.sleep(refresco);
         }
     }
 
@@ -73,7 +83,7 @@ public class Displayer {
             //Actualiza los datos constantemente.
             gui.actualizarDatosSensorYCarga();
 
-            // pone el poner el hilo actual en pausa
+            // pone el hilo actual en pausa
             // por el tiempo que se necesite en milisegundos
             Thread.sleep(gui.getFrecuenciaActualizacion() * 20); //Hasta 2 segundos de retardo
         }
@@ -85,5 +95,5 @@ public class Displayer {
         UI.setSize(1024, 600);
         return UI;
     }
-    
+
 }

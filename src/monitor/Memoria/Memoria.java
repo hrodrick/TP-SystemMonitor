@@ -73,18 +73,18 @@ public abstract class Memoria implements IMemoria {
     @Override
     public String toConsoleString() {
         String result = "Memoria del sistema: "
-                + "\nMemoria RAM total: " + getMemFisicaTotal()
-                + "\nMemoria SWAP total: " + getMemSwapTotal();
+                + "\nMemoria RAM total: " + getMemFisicaTotal()/1024/1024+"mb."
+                + "\nMemoria SWAP total: " + getMemSwapTotal()/1024/1024+"mb.";
 
         return result;
     }
 
     @Override
     public String toConsoleStringActualizable() {
-        String result = "Uso de RAM: " + getMemFisicaUso()
-                + "\nRAM disponible : " + getMemFisicaDisponible()
-                + "\nSWAP en uso: " + getMemSwapUso()
-                + "\nSWAP disponible: " + getMemSwapDisponible();
+        String result = "Uso de RAM: " + getMemFisicaUso()/1024/1024+"mb."
+                + "\nRAM disponible : " + getMemFisicaDisponible()/1024/1024+"mb."
+                + "\nSWAP en uso: " + getMemSwapUso()/1024/1024+"mb."
+                + "\nSWAP disponible: " + getMemSwapDisponible()/1024/1024+"mb.";
 
         return result;
     }
