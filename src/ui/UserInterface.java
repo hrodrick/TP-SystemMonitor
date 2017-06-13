@@ -26,6 +26,8 @@ public class UserInterface extends javax.swing.JFrame {
     public UserInterface() {
         initComponents();
         jTextArea1.setEditable(false);
+        jTextArea1.setFocusable(false);
+        jTextArea2.setFocusable(false);
         jTextArea2.setEditable(false);
     }
 
@@ -51,12 +53,6 @@ public class UserInterface extends javax.swing.JFrame {
         //MEMORIA
         lblRAMTotal.setText(Long.toString(monitor.getMemoria().getMemFisicaTotal() / 1024 / 1024) + "mb");
         lblMemoriaSwapTot.setText(Long.toString(monitor.getMemoria().getMemSwapTotal() / 1024 / 1024) + "mb");
-
-        //Esta funcion agrega toda la informacion de networks a un text area
-        cargarNIC(monitor.getNetworks().getNics());
-
-        cargarVelVentiladores(monitor.getSensores().getVelVentiladores());
-
     }
 
     public void actualizarDatosSensorYCarga() {
@@ -69,6 +65,10 @@ public class UserInterface extends javax.swing.JFrame {
         lblUsoRamDisponible.setText(String.valueOf(monitor.getMemoria().getMemFisicaDisponible() / 1024 / 1024) + "mb");
         lblUsoSWAP.setText(String.valueOf(monitor.getMemoria().getMemSwapUso() / 1024 / 1024) + "mb");
         lblUsoSWAPDisponible.setText(String.valueOf(monitor.getMemoria().getMemSwapDisponible() / 1024 / 1024) + "mb");
+        
+        //Esta funcion agrega toda la informacion de networks a un text area
+        cargarNIC(monitor.getNetworks().getNics());
+        cargarVelVentiladores(monitor.getSensores().getVelVentiladores());
     }
 
     public Integer getFrecuenciaActualizacion() {

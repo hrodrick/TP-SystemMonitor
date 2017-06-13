@@ -6,6 +6,7 @@
 package monitor;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ public class Displayer {
 
     public Displayer(Monitor m) {
         this.m = m;
-        this.guiIsOn = false;
+        this.guiIsOn = true;
         refresco = 500;
         duracion = 10;
         rutaJson = "C:\\datosSistema.JSON";
@@ -73,6 +74,7 @@ public class Displayer {
 
     private void display_ConsoleActualizable() throws InterruptedException {
         int a;
+        DecimalFormat df = new DecimalFormat();
         for (int i = 0; i < duracion * 1000; i += refresco) {
             a = 0;
             String ventiladores = "";
@@ -82,9 +84,9 @@ public class Displayer {
                 a++;
             }
             System.out.println("\n--------------------------------"
-                    + "\nUso CPU:" + m.getMicro().getUsoActualCPU()
-                    + "\nTemperatura CPU: " + m.getSensores().getTempCPU()
-                    + "\nVoltaje de CPU: " + m.getSensores().getVoltajeCPU()
+                    + "\nUso CPU:" + df.format(100 * m.getMicro().getUsoActualCPU()) + "%"
+                    + "\nTemperatura CPU: " + m.getSensores().getTempCPU() + "ºC"
+                    + "\nVoltaje de CPU: " + df.format(100 * m.getSensores().getVoltajeCPU()) + "W"
                     + "\nVelocidad de ventilador: "
                     + ventiladores
                     + "\nRAM en uso: " + m.getMemoria().getMemFisicaUso()
@@ -104,7 +106,6 @@ public class Displayer {
     private void display_graphic() throws InterruptedException {
         UserInterface gui = construirGUI();
         gui.setVisible(true);
-
         while (true) {
             //Actualiza los datos constantemente.
             gui.actualizarDatosSensorYCarga();
