@@ -1,41 +1,38 @@
 package persistencia;
 
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+
 public class ArchivoJSON {
 
-    private static FileWriter file;            
+    private static FileWriter file;   
 
-    /**
-     * Escribe la cadena JSON en el archivo
-     *
-     * @param cadenaJson
-     * @param directorio
-     */
-    public void escribir(String cadenaJson, String directorio){
-        this.abrir();
-        PrintWriter pw = null;
-        
+    public void escribir(String cadenaJson, String directorio) {
+        this.abrir(directorio);
         try {
-            file = new FileWriter(directorio);
-            pw = new PrintWriter(file);
-            pw.print(cadenaJson);            
+            file.write(cadenaJson);
+            if (file != null) {
+                file.close();
+            }
 
         } catch (IOException e) {
-            System.err.println("Error al guardar el archivo.");
+            e.printStackTrace();
         }
-        finally {
-            try {
-                // aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (file != null) {
-                    file.close();
-                }
-            } catch (IOException e2) {
-                System.err.println("Error al cerrar el archivo");
+    }
+
+    private void abrir(String directorio) {
+
+        try {
+            if (file == null) {
+                file = new FileWriter(directorio);
             }
+
+        } catch (IOException e) {
+            System.err.println("Error al abrir el archivo.");
         }
     }
 
@@ -46,21 +43,39 @@ public class ArchivoJSON {
      * @param clave
      * @return 'Esta es la cadena asociada a pirulo' si clave = 'pirulo'
      */
-    public String leer(String clave) {
-        this.abrir();
-        /*
-        ....
-         */
-        return "";
-    }
+    public String leer(String clavem, String directorio) throws FileNotFoundException {
+        this.abrir(directorio);
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+            fr = new FileReader(directorio);
+            br = new BufferedReader(fr);
+            // Lectura del fichero
+            String linea;
 
-    /**
-     * Abre el archivo con el cual se va a interactuar
-     */
-    private void abrir() {
-        /*
-        ....
-         */
+            while ((linea = br.readLine()) != null) {               
+                        System.out.println("se encontro la palabra " + linea);          
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                    br.close();
+                    file.close();
+                }
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
+        return "";
     }
 
     @Override

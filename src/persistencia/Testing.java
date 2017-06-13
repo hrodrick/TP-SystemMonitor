@@ -10,29 +10,19 @@ import monitor.Monitor;
 import monitor.MonitorWindows;
 import org.json.JSONObject;
 
-/**
- *
- * @author dell
- */
 public class Testing {
     
     public static void main(String args[]) throws IOException{
     ///Practica de escritura en el archivo o algo asi
-    ///Libreria loca JSON tiene JSONStringer() fijarse esta funcion
-        JSONObject obj = new JSONObject();
-        Monitor m = new MonitorWindows();
-        
-        
-        obj.put("CPU", m.getMicro().toJson());
-        obj.put("Memorias", m.getMemoria().toJson());
-        obj.put("Placa Madre", m.getPlacaMadre().toJson());
-        obj.put("SO", m.getSistemaOperativo().toJson());
-        obj.put("Sensores", m.getSensores().toJson());       
+    ///Libreria loca JSON tiene JSONStringer() fijarse esta funcion        
+        Monitor m = new MonitorWindows();        
         
         ArchivoJSON archivo = new ArchivoJSON();
-        archivo.escribir(obj.toString(), "c:/prueba.txt");
         
-        System.out.print(obj);
+        archivo.escribir(m.toJson(),"c:/prueba.txt");        
+        archivo.leer("Procesador", "c:/prueba.txt");
+        
+       // System.out.print(obj);
         ///---------------------------------------------------
     }
     
