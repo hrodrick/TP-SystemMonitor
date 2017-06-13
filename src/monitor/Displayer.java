@@ -27,7 +27,7 @@ public class Displayer {
 
     public Displayer(Monitor m) {
         this.m = m;
-        this.guiIsOn = true;
+        this.guiIsOn = false;
         refresco = 500;
         duracion = 10;
         rutaJson = "C:\\datosSistema.JSON";
@@ -59,11 +59,10 @@ public class Displayer {
 
     private void display_console() throws InterruptedException {
         display_imprimir();
-        System.out.println(m.toConsoleString()
-                + m.toConsoleStringActualizable()
+        System.out.println(m.toString()
                 + "\n--------------------------------o\n"
                 + "Desea una sucesion de datos en tiempo real? S/N + enter\n");
-        
+
         Scanner lector = new Scanner(System.in);
         String option = lector.next();
         if (option.equalsIgnoreCase("s")) {
@@ -73,18 +72,35 @@ public class Displayer {
     }
 
     private void display_ConsoleActualizable() throws InterruptedException {
-        
-        for (int i = 0; i < duracion*1000; i += refresco) {
-            System.out.println(m.toConsoleStringActualizable());
+        int a;
+        for (int i = 0; i < duracion * 1000; i += refresco) {
+            a = 0;
+            String ventiladores = "";
+            
+            for (int vel : m.getSensores().getVelVentiladores()) {
+                ventiladores = ventiladores.concat("vent. " + a + ": " + vel + "rpm" + "\n");
+                a++;
+            }
+            System.out.println("\n--------------------------------"
+                    + "\nUso CPU:" + m.getMicro().getUsoActualCPU()
+                    + "\nTemperatura CPU: " + m.getSensores().getTempCPU()
+                    + "\nVoltaje de CPU: " + m.getSensores().getVoltajeCPU()
+                    + "\nVelocidad de ventilador: "
+                    + ventiladores
+                    + "\nRAM en uso: " + m.getMemoria().getMemFisicaUso()
+                    + "\nRAM disponible: " + m.getMemoria().getMemFisicaDisponible()
+                    + "\nSwap en uso: " + m.getMemoria().getMemSwapUso()
+                    + "\nSwap diponible: " + m.getMemoria().getMemSwapDisponible()
+                    + "NICS:" + m.getNetworks().toString());
             Thread.sleep(refresco);
         }
     }
 
-    private void display_imprimir(){
+    private void display_imprimir() {
         ArchivoJSON archi = new ArchivoJSON();
         archi.escribir(m.toJson(), rutaJson);
     }
-    
+
     private void display_graphic() throws InterruptedException {
         UserInterface gui = construirGUI();
         gui.setVisible(true);

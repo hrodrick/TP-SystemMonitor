@@ -13,38 +13,43 @@ import oshi.hardware.NetworkIF;
  *
  * @author Rodrigo Soria
  */
-public class NIC implements INIC{
-    
-    private NetworkIF controladorRed; 
-    
-    public NIC(NetworkIF controller){
+public class NIC implements INIC {
+
+    private NetworkIF controladorRed;
+
+    public NIC(NetworkIF controller) {
         controladorRed = controller;
     }
+
     @Override
-    public String[] getIPv4(){
+    public String[] getIPv4() {
         return controladorRed.getIPv4addr();
     }
+
     @Override
-    public String getMacAdress(){
+    public String getMacAdress() {
         return controladorRed.getMacaddr();
     }
+
     @Override
-    public String getNombre(){
+    public String getNombre() {
         return controladorRed.getName();
     }
+
     @Override
-    public long getBytesEnviados(){
+    public long getBytesEnviados() {
         controladorRed.updateNetworkStats();
         return controladorRed.getBytesSent();
     }
+
     @Override
-    public long getBytesRecibidos(){
+    public long getBytesRecibidos() {
         controladorRed.updateNetworkStats();
         return controladorRed.getBytesRecv();
     }
 
     @Override
-    public String toJson() {         
+    public String toJson() {
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Nombre").value(this.getNombre())
@@ -53,25 +58,21 @@ public class NIC implements INIC{
                 .key("BytesEnviados").value(this.getBytesEnviados())
                 .key("BytesRecibidos").value(this.getBytesRecibidos())
                 .endObject().toString();
-        
+
         return Json;
     }
 
+    
+
     @Override
-    public String toConsoleString() {
-        String result = "Nombre: " + getNombre()+
-                        "\nIPv4: " + Arrays.toString(getIPv4())+
-                        "\nMAC: " + getMacAdress()+
-                        "\n-----";
+    public String toString() {
+        String result = "Nombre: " + getNombre()
+                + "\nIPv4: " + Arrays.toString(getIPv4())
+                + "\nMAC: " + getMacAdress()
+                + "\nBytes enviados: " + getBytesEnviados()
+                + "\nBytes recibidos: " + getBytesRecibidos()
+                + "\n-----";
         return result;
     }
-    @Override
-    public String toConsoleStringActualizable(){
-        String result = "\nBytes enviados: " + getBytesEnviados()+
-                        "\nBytes recibidos: " + getBytesRecibidos()+
-                        "\n-----";
-        return result;
-    }
-    
-    
+
 }

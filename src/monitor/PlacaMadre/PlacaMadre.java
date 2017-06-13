@@ -43,7 +43,7 @@ public abstract class PlacaMadre implements MotherBoard {
     }
 
     @Override
-    public String toConsoleString() {
+    public String toString() {
         String result = "Placa madre: "
                 + "\nMarca: " + getMarcaMother()
                 + "\nModelo Placa madre: " + getModeloMother();

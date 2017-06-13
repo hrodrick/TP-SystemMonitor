@@ -5,15 +5,13 @@
  */
 package monitor.SistemaOperativo;
 
-import monitor.ConsolePrinteable;
 import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface OperativeSys extends JSONSerializable,
-                                      ConsolePrinteable{
+public interface OperativeSys extends JSONSerializable{
     public String getFamiliaOS();
     public String getVersionOS();
     public String getFabricanteOS();

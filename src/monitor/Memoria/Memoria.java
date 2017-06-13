@@ -48,15 +48,6 @@ public abstract class Memoria implements IMemoria {
 
     @Override
     public String toJson() {
-
-        /*Forma chota y vieja
-        String Json = "{\"Memoria RAM total \":\"" +this.getMemFisicaTotal()+"\","
-                + "\"Memoria RAM usada \":\"" +this.getMemFisicaUso()+"\","
-                + "\"Memoria RAM disponible \":\"" +this.getMemFisicaDisponible()+"\","
-                + "\"Memoria de intercambio total \":\"" +this.getMemSwapTotal()+"\","
-                + "\"Memoria de intercambio usada\":\"" + this.getMemSwapUso()+"\","
-                + "\"Memoria de intercambio disponible\":\"" +this.getMemSwapDisponible()+"\"}";
-         */
         JSONStringer js = new JSONStringer();
         String Json = js.object()
                 .key("Memoria fisica disponible").value(this.getMemFisicaDisponible())
@@ -71,22 +62,16 @@ public abstract class Memoria implements IMemoria {
     }
 
     @Override
-    public String toConsoleString() {
-        String result = "Memoria del sistema: "
+    public String toString() {
+        String res = "Memoria del sistema: "
                 + "\nMemoria RAM total: " + getMemFisicaTotal()/1024/1024+"mb."
-                + "\nMemoria SWAP total: " + getMemSwapTotal()/1024/1024+"mb.";
-
-        return result;
-    }
-
-    @Override
-    public String toConsoleStringActualizable() {
-        String result = "Uso de RAM: " + getMemFisicaUso()/1024/1024+"mb."
+                + "\nMemoria SWAP total: " + getMemSwapTotal()/1024/1024+"mb."
+                + "Uso de RAM: " + getMemFisicaUso()/1024/1024+"mb."
                 + "\nRAM disponible : " + getMemFisicaDisponible()/1024/1024+"mb."
                 + "\nSWAP en uso: " + getMemSwapUso()/1024/1024+"mb."
                 + "\nSWAP disponible: " + getMemSwapDisponible()/1024/1024+"mb.";
 
-        return result;
+        return res;
     }
 
 }

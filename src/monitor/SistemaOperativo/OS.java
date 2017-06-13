@@ -53,7 +53,7 @@ public abstract class OS implements OperativeSys {
     }
 
     @Override
-    public String toConsoleString() {
+    public String toString() {
         String result = "Sistema operativo: " + getFamiliaOS()
                 + "\nFabricante: " + getFabricanteOS()
                 + "\nEdicion: " + getEdicionOS()

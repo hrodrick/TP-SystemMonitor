@@ -5,17 +5,13 @@
  */
 package monitor.Cpu;
 
-import monitor.ConsolePrinteable;
-import monitor.ConsolePrinteableActualizable;
 import monitor.JSONSerializable;
 
 /**
  *
  * @author Alumno
  */
-public interface ICPU  extends JSONSerializable,
-                               ConsolePrinteable,
-                               ConsolePrinteableActualizable{ //Ejemplo claro de interfaz que si posee metodos actualizables.
+public interface ICPU  extends JSONSerializable{ //Ejemplo claro de interfaz que si posee metodos actualizables.
     public String getFamiliaCPU();
     public String getModeloCPU();
     public String getFabricanteCPU();

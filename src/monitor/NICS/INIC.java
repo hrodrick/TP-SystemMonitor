@@ -5,17 +5,13 @@
  */
 package monitor.NICS;
 
-import monitor.ConsolePrinteable;
-import monitor.ConsolePrinteableActualizable;
 import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface INIC extends JSONSerializable,
-                              ConsolePrinteable,
-                              ConsolePrinteableActualizable{
+public interface INIC extends JSONSerializable{
     public String[] getIPv4();
     public String getMacAdress();
     public String getNombre();

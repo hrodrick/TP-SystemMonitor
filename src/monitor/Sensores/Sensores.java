@@ -40,7 +40,7 @@ public abstract class Sensores implements ISensores {
     }
 
     @Override
-    public String toConsoleStringActualizable() {
+    public String toString() {
 
         String ventiladores = "";
         int i = 0;

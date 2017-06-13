@@ -5,15 +5,13 @@
  */
 package monitor.PlacaMadre;
 
-import monitor.ConsolePrinteable;
 import monitor.JSONSerializable;
 
 /**
  *
  * @author Rodrigo Soria
  */
-public interface MotherBoard extends JSONSerializable,
-                                     ConsolePrinteable{ //Ejemplo claro de interfaz que no posee métodos actualizables.
+public interface MotherBoard extends JSONSerializable{ //Ejemplo claro de interfaz que no posee métodos actualizables.
     public String getMarcaMother();
     public String getModeloMother();
 }

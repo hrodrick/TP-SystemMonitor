@@ -9,9 +9,7 @@ import monitor.Sensores.ISensores;
 import monitor.SistemaOperativo.OperativeSys;
 import org.json.JSONStringer;
 
-public abstract class Monitor implements JSONSerializable,
-        ConsolePrinteable,
-        ConsolePrinteableActualizable {
+public abstract class Monitor implements JSONSerializable{
 
     private ICPU micro;
     private IMemoria memory;
@@ -74,33 +72,21 @@ public abstract class Monitor implements JSONSerializable,
 
         return Json;
     }
-
     @Override
-    public String toConsoleString() {
+    public String toString(){
         String res
                 = "\n-------------Informacion del sistema-------------"
-                + "\n" + sistemaOperativo.toConsoleString()
+                + "\n" + sistemaOperativo.toString()
                 + "\n-------------------------------------------------"
-                + "\n" + motherBoard.toConsoleString()
+                + "\n" + motherBoard.toString()
                 + "\n-------------------------------------------------"
-                + "\n" + micro.toConsoleString()
+                + "\n" + micro.toString()
                 + "\n-------------------------------------------------"
-                + "\n" + memory.toConsoleString()
+                + "\n" + sensores.toString()
                 + "\n-------------------------------------------------"
-                + "\n" + NICS.toConsoleString();
-        return res;
-    }
-
-    @Override
-    public String toConsoleStringActualizable() {
-        String res
-                = "\n-----------Estado del sistema actual-------------"
-                + "\n" + micro.toConsoleStringActualizable()
+                +        memory.toString()
                 + "\n-------------------------------------------------"
-                + "\n" + sensores.toConsoleStringActualizable()
-                + "\n-------------------------------------------------"
-                + "\n" + memory.toConsoleStringActualizable()
-                + "\n-------------------------------------------------";
+                + "\n" + NICS.toString();
         return res;
     }
 }

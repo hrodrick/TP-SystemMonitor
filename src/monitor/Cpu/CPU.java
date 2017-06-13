@@ -73,7 +73,7 @@ public abstract class CPU implements ICPU {
     }
 
     @Override
-    public String toConsoleString() {
+    public String toString() {
         String result = "Procesador: "
                 + "\n" + getNombreCPU()
                 + "\nFabricante: " + getFabricanteCPU()
@@ -81,14 +81,8 @@ public abstract class CPU implements ICPU {
                 + "\nModelo: " + getModeloCPU()
                 + "\nNucleos: " + getNucleosFisicosCPU()
                 + "\nHilos: " + getNucleosLogicosCPU()
-                + "\nArquitectura: " + (esDe64Bits() ? "x64" : "x86");
-
-        return result;
-    }
-
-    @Override
-    public String toConsoleStringActualizable() {
-        String result = "Uso de CPU: " + getUsoActualCPU()+"%";
+                + "\nArquitectura: " + (esDe64Bits() ? "x64" : "x86")
+                + "\nUso de CPU: " + getUsoActualCPU()+"%";
         return result;
     }
 

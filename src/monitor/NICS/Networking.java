@@ -40,12 +40,12 @@ public abstract class Networking implements INetworking {
     }
 
     @Override
-    public String toConsoleString() {
+    public String toString() {
         String result = "Networks: ";
         int i = 0;
         for (INIC controller : nics) {
             i++;
-            result = result.concat("\nNIC "+ i +":\n"+ controller.toConsoleString());
+            result = result.concat("\nNIC "+ i +":\n"+ controller.toString());
         }
         return result;
     }
