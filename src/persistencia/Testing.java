@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
-
 import java.io.IOException;
 import monitor.Monitor;
 import monitor.MonitorWindows;
-import org.json.JSONObject;
 
 public class Testing {
     
@@ -19,8 +12,8 @@ public class Testing {
         
         ArchivoJSON archivo = new ArchivoJSON();
         
-        archivo.escribir(m.toJson(),"c:/prueba.txt");        
-        archivo.leer("Procesador", "c:/prueba.txt");
+        archivo.escribir(m.toJson(),"c:/prueba.txt");
+        System.out.println(archivo.leer("Placa Madre", "c:/prueba.txt"));
         
        // System.out.print(obj);
         ///---------------------------------------------------

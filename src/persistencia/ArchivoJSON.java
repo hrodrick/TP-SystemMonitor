@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import org.json.JSONObject;
 
 
 public class ArchivoJSON {
@@ -47,18 +48,14 @@ public class ArchivoJSON {
         this.abrir(directorio);
         FileReader fr = null;
         BufferedReader br = null;
+        String json = null;                
         try {
             // Apertura del fichero y creacion de BufferedReader para poder
             // hacer una lectura comoda (disponer del metodo readLine()).
             fr = new FileReader(directorio);
             br = new BufferedReader(fr);
-            // Lectura del fichero
-            String linea;
-
-            while ((linea = br.readLine()) != null) {               
-                        System.out.println("se encontro la palabra " + linea);          
-                
-            }
+            // Lectura del fichero            
+            json=br.readLine();    
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -75,7 +72,10 @@ public class ArchivoJSON {
                 e2.printStackTrace();
             }
         }
-        return "";
+        ///Se instancia un JSON llamando al constructor que te pide un String
+        ///en este caso lo que se leyo del archivo, me costo un huevo darme cuenta.
+        JSONObject o = new JSONObject(json);              
+        return o.getString(clavem);
     }
 
     @Override
