@@ -29,7 +29,7 @@ public class Displayer {
         this.guiIsOn = false;
         refresco = 500;
         duracion = 10;
-        rutaJson = "C:\\datosSistema.JSON";
+        rutaJson = "C:\\datosSistema.txt";
     }
 
     public void setGuiIsOn(boolean isOn) {
