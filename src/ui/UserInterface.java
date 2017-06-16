@@ -5,11 +5,12 @@
  */
 package ui;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import monitor.Monitor;
 import monitor.NICS.INIC;
@@ -22,7 +23,7 @@ import persistencia.ArchivoJSON;
 public class UserInterface extends javax.swing.JFrame {
 
     Monitor monitor;
-
+    Danger peligro=new Danger();;
     public UserInterface() {
         initComponents();
         jTextArea1.setEditable(false);
@@ -56,6 +57,16 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     public void actualizarDatosSensorYCarga() {
+        
+        if(monitor.getMemoria().getMemSwapUso() >= monitor.getMemoria().getMemSwapTotal()*0.05){
+            peligro.setVisible(true);
+            try {            
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            peligro.setVisible(false);
+        }         
 
         lblTempCpu.setText(monitor.getSensores().getTempCPU().shortValue() + "°C");
         DecimalFormat df = new DecimalFormat("0.00");
@@ -65,6 +76,7 @@ public class UserInterface extends javax.swing.JFrame {
         lblUsoRamDisponible.setText(String.valueOf(monitor.getMemoria().getMemFisicaDisponible() / 1024 / 1024) + "mb");
         lblUsoSWAP.setText(String.valueOf(monitor.getMemoria().getMemSwapUso() / 1024 / 1024) + "mb");
         lblUsoSWAPDisponible.setText(String.valueOf(monitor.getMemoria().getMemSwapDisponible() / 1024 / 1024) + "mb");
+       
         
         //Esta funcion agrega toda la informacion de networks a un text area
         cargarNIC(monitor.getNetworks().getNics());
@@ -647,7 +659,7 @@ public class UserInterface extends javax.swing.JFrame {
         String directorio = JOptionPane.showInputDialog("Donde desea guardar el archivo? ");
 
         String fecha = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss").format(new Date());
-        archivo.escribir(monitor.toJson(), directorio + "SystemInfo" + fecha + ".txt");
+        archivo.escribir(monitor.toJson(),"C:\\"+directorio+".Json");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

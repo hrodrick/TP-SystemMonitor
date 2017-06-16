@@ -63,7 +63,7 @@ public abstract class Memoria implements IMemoria {
 
     @Override
     public String toString() {
-        String res = "Memoria del sistema: "
+        String res = "\nMemoria del sistema: "
                 + "\nMemoria RAM total: " + getMemFisicaTotal()/1024/1024+"mb."
                 + "\nMemoria SWAP total: " + getMemSwapTotal()/1024/1024+"mb."
                 + "\nUso de RAM: " + getMemFisicaUso()/1024/1024+"mb."

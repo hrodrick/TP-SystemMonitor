@@ -8,14 +8,10 @@ public class Testing {
     public static void main(String args[]) throws IOException{
     ///Practica de escritura en el archivo o algo asi
     ///Libreria loca JSON tiene JSONStringer() fijarse esta funcion        
-        Monitor m = new MonitorWindows();        
-        
-        ArchivoJSON archivo = new ArchivoJSON();
-        
+        Monitor m = new MonitorWindows();                
+        ArchivoJSON archivo = new ArchivoJSON();        
         archivo.escribir(m.toJson(),"c:/prueba.txt");
-        System.out.println(archivo.leer("Placa Madre", "c:/prueba.txt"));
-        
-       // System.out.print(obj);
+        System.out.println(archivo.leer("Procesador", "c:/prueba.txt"));     
         ///---------------------------------------------------
     }
     

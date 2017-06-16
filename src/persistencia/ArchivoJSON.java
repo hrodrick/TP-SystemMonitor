@@ -1,22 +1,22 @@
 package persistencia;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.json.JSONObject;
 
-
 public class ArchivoJSON {
 
-    private static FileWriter file;   
+    private static FileWriter file;
 
     public void escribir(String cadenaJson, String directorio) {
+        
         this.abrir(directorio);
         try {
             file.write(cadenaJson);
-            if (file != null) {
+            if (file != null) {              
+
                 file.close();
             }
 
@@ -24,38 +24,28 @@ public class ArchivoJSON {
             e.printStackTrace();
         }
     }
-
     private void abrir(String directorio) {
-
-        try {
+        try {            
             if (file == null) {
-                file = new FileWriter(directorio);
+            file = new FileWriter(directorio);    
             }
 
         } catch (IOException e) {
             System.err.println("Error al abrir el archivo.");
         }
     }
-
-    /**
-     * Devuelve la cadena JSON asociada a la clave provista { 'pirulo': 'Esta es
-     * la cadena asociada a pirluo' }
-     *
-     * @param clave
-     * @return 'Esta es la cadena asociada a pirulo' si clave = 'pirulo'
-     */
-    public String leer(String clavem, String directorio){
+    public String leer(String clavem, String directorio) {
         this.abrir(directorio);
         FileReader fr = null;
         BufferedReader br = null;
-        String json = null;                
+        String json = null;
         try {
             // Apertura del fichero y creacion de BufferedReader para poder
             // hacer una lectura comoda (disponer del metodo readLine()).
             fr = new FileReader(directorio);
             br = new BufferedReader(fr);
             // Lectura del fichero            
-            json=br.readLine();    
+            json = br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -74,14 +64,23 @@ public class ArchivoJSON {
         }
         ///Se instancia un JSON llamando al constructor que te pide un String
         ///en este caso lo que se leyo del archivo, me costo un huevo darme cuenta.
-        JSONObject o = new JSONObject(json);              
-        return o.getString(clavem);
+        JSONObject o = new JSONObject(json);
+        String resultado="";
+        if(!o.has(clavem)){
+            System.out.println("Esa clave no existe");
+        }
+        else{
+            resultado=o.getString(clavem);
+            
+        }
+        return resultado;
     }
 
     @Override
     protected void finalize() throws Throwable {
         file.flush();
         file.close();
+        file=null;
         super.finalize();
     }
 }

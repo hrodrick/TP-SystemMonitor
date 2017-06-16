@@ -26,7 +26,7 @@ public class Displayer {
 
     public Displayer(Monitor m) {
         this.m = m;
-        this.guiIsOn = false;
+        guiIsOn = true;
         refresco = 500;
         duracion = 10;
         rutaJson = "C:\\datosSistema.txt";
@@ -59,8 +59,8 @@ public class Displayer {
     private void display_console() throws InterruptedException {
         
         System.out.println(m.toString()
-                + "\n--------------------------------o\n"
-                + "Desea una sucesion de datos en tiempo real? S/N + enter"
+                + "\n--------------------------------\nO"
+                + "\nDesea una sucesion de datos en tiempo real? S/N + enter"
                 + "\ndurará : " + duracion + "segundos"
                 + "\nse actualizará cada: " + refresco + "milisegundos.\n");
         Scanner lector = new Scanner(System.in);
@@ -81,13 +81,13 @@ public class Displayer {
         String clave = "";
         if (option.equalsIgnoreCase("s")) {
             ArchivoJSON datos = new ArchivoJSON();
-            do{
+            do{                
                 System.out.println("\nEscriba la clave del valor a leer: ");
                 clave = lector.next();
                 System.out.println(datos.leer(clave, rutaJson));
                 System.out.println("\nDesea continuar leyendo datos? S/N\n");
                 option = lector.next();
-            }while(!option.equalsIgnoreCase("s"));
+            }while(option.equalsIgnoreCase("s"));
         }
         
     }
