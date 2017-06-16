@@ -13,6 +13,17 @@ public abstract class Sensores implements ISensores {
 
     @Override
     public Double getTempCPU() {
+        /* 1* posible solucion para temperatura de CPU.
+         * no parece funcionar, además en los mismos comentarios advierte de que funciona como deberia y que NO se actualiza
+         * la informacion.
+         * https://github.com/profesorfalken/jHardware/blob/master/src/main/java/org/jutils/jhardware/util/TemperatureUtils.java
+         * 2* posibles soluciones
+         * https://stackoverflow.com/questions/123575/how-to-get-the-temperature-of-motherboard-of-a-pc-and-other-hardware-statistics
+         * 3* posible solucion:
+         * Genera el código WMI del hardware especifíco en el que se ejecuta necesario para realizar funciones como la
+         * recolección de datos de temperatura. Una lástima que no sea en java.
+         * https://www.microsoft.com/en-us/download/details.aspx?id=8572
+        */
         return sensores.getCpuTemperature();
     }
 
