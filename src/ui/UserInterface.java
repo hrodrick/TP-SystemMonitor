@@ -57,7 +57,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     public void actualizarDatosSensorYCarga() {
-        
+        /*
         if(monitor.getMemoria().getMemSwapUso() >= monitor.getMemoria().getMemSwapTotal()*0.05){
             peligro.setVisible(true);
             try {            
@@ -67,7 +67,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
             peligro.setVisible(false);
         }         
-
+        */
         lblTempCpu.setText(monitor.getSensores().getTempCPU().shortValue() + "°C");
         DecimalFormat df = new DecimalFormat("0.00");
         lblUsoCpu.setText(df.format(100 * monitor.getMicro().getUsoActualCPU()) + "%");
