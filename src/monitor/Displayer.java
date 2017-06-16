@@ -5,11 +5,9 @@
  */
 package monitor;
 
-import java.io.IOException;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import persistencia.ArchivoJSON;
 import ui.UserInterface;
@@ -28,7 +26,7 @@ public class Displayer {
 
     public Displayer(Monitor m) {
         this.m = m;
-        this.guiIsOn = true;
+        this.guiIsOn = false;
         refresco = 500;
         duracion = 10;
         rutaJson = "C:\\datosSistema.JSON";
@@ -59,22 +57,45 @@ public class Displayer {
     }
 
     private void display_console() throws InterruptedException {
-        display_imprimir();
+        
         System.out.println(m.toString()
                 + "\n--------------------------------o\n"
-                + "Desea una sucesion de datos en tiempo real? S/N + enter\n");
-
+                + "Desea una sucesion de datos en tiempo real? S/N + enter"
+                + "\ndurará : " + duracion + "segundos"
+                + "\nse actualizará cada: " + refresco + "milisegundos.\n");
         Scanner lector = new Scanner(System.in);
+        
         String option = lector.next();
         if (option.equalsIgnoreCase("s")) {
             display_ConsoleActualizable();
         }
-
+        // escritura de archivo
+        System.out.println("\nDesea crear un archivo con los datos actuales del sistema? S/N\n");
+        option = lector.next();
+        if (option.equalsIgnoreCase("s")) {
+            display_imprimir();
+        }
+        // lectura de archivo
+        System.out.println("\nDesea desea leer de un archivo los datos del sistema? S/N\n");
+        option = lector.next();
+        String clave = "";
+        if (option.equalsIgnoreCase("s")) {
+            ArchivoJSON datos = new ArchivoJSON();
+            do{
+                System.out.println("\nEscriba la clave del valor a leer: ");
+                clave = lector.next();
+                System.out.println(datos.leer(clave, rutaJson));
+                System.out.println("\nDesea continuar leyendo datos? S/N\n");
+                option = lector.next();
+            }while(!option.equalsIgnoreCase("s"));
+        }
+        
     }
 
     private void display_ConsoleActualizable() throws InterruptedException {
         int a;
         DecimalFormat df = new DecimalFormat();
+        //multiplico duracion * 1000 para que refresco simule ser milisegundos.
         for (int i = 0; i < duracion * 1000; i += refresco) {
             a = 0;
             String ventiladores = "";
@@ -112,7 +133,7 @@ public class Displayer {
 
             // pone el hilo actual en pausa
             // por el tiempo que se necesite en milisegundos
-            Thread.sleep(gui.getFrecuenciaActualizacion() * 20); //Hasta 2 segundos de retardo
+            Thread.sleep(gui.getFrecuenciaActualizacion() * 30); //Hasta 3 segundos de retardo
         }
     }
 

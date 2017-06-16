@@ -44,7 +44,7 @@ public class ArchivoJSON {
      * @param clave
      * @return 'Esta es la cadena asociada a pirulo' si clave = 'pirulo'
      */
-    public String leer(String clavem, String directorio) throws FileNotFoundException {
+    public String leer(String clavem, String directorio){
         this.abrir(directorio);
         FileReader fr = null;
         BufferedReader br = null;

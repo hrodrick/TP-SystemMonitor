@@ -1,5 +1,6 @@
 package monitor.Cpu;
 
+import java.text.DecimalFormat;
 import org.json.JSONStringer;
 import oshi.hardware.CentralProcessor;
 
@@ -74,6 +75,7 @@ public abstract class CPU implements ICPU {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         String result = "Procesador: "
                 + "\n" + getNombreCPU()
                 + "\nFabricante: " + getFabricanteCPU()
@@ -82,7 +84,7 @@ public abstract class CPU implements ICPU {
                 + "\nNucleos: " + getNucleosFisicosCPU()
                 + "\nHilos: " + getNucleosLogicosCPU()
                 + "\nArquitectura: " + (esDe64Bits() ? "x64" : "x86")
-                + "\nUso de CPU: " + getUsoActualCPU()+"%";
+                + "\nUso de CPU: " + df.format(getUsoActualCPU())+"%";
         return result;
     }
 
