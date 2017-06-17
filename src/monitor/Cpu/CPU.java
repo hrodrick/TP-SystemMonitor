@@ -32,6 +32,7 @@ public abstract class CPU implements ICPU {
     @Override
     public Boolean esDe64Bits() {
 
+        
         return !p.isCpu64bit(); //por algún motivo el resultado está alrevés. Con esto debería bastar.
     }
 

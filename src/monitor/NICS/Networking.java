@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package monitor.NICS;
 
 import java.util.ArrayList;
-import org.json.JSONStringer;
+import org.json.JSONObject;
 import oshi.hardware.NetworkIF;
 import oshi.hardware.common.AbstractNetworks;
 
@@ -30,11 +25,18 @@ public abstract class Networking implements INetworking {
 
     @Override
     public String toJson() {
-        JSONStringer js = new JSONStringer();
+        //JSONStringer js = new JSONStringer();                        
+        /* Forma vieja y rara que no funca
         for (INIC i : nics) {
             js.value(i.toJson());
+        } 
+        */
+        //Forma piola que anda
+        JSONObject js = new JSONObject();        
+        for(int i = 0; i<nics.size();i++){
+            js.append("Red:"+i,nics.get(i).toJson());            
         }
-        String json = js.endArray().toString();
+        String json = js.toString();
 
         return json;
     }

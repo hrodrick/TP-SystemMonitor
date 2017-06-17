@@ -66,8 +66,8 @@ public abstract class Monitor implements JSONSerializable{
                 .key("Memoria").value(this.memory.toJson())
                 .key("Sensores").value(this.sensores.toJson())
                 .key("Sistema Operativo").value(this.sistemaOperativo.toJson())
-                .key("Placa Madre").value(this.motherBoard.toJson())
-                //.key("NICS").value(this.NICS.toJson())
+                .key("NICS").value(this.NICS.toJson())
+                .key("Placa Madre").value(this.motherBoard.toJson())                
                 .endObject().toString();
 
         return Json;
@@ -84,7 +84,7 @@ public abstract class Monitor implements JSONSerializable{
                 + "\n-------------------------------------------------"
                 + "\n" + sensores.toString()
                 + "\n-------------------------------------------------"
-                +        memory.toString()
+                +       memory.toString()
                 + "\n-------------------------------------------------"
                 + "\n" + NICS.toString();
         return res;

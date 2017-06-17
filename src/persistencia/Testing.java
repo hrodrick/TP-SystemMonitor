@@ -11,7 +11,7 @@ public class Testing {
         Monitor m = new MonitorWindows();                
         ArchivoJSON archivo = new ArchivoJSON();        
         archivo.escribir(m.toJson(),"c:/prueba.txt");
-        System.out.println(archivo.leer("Procesador", "c:/prueba.txt"));     
+        System.out.println(archivo.leer("NICS", "c:/prueba.txt"));     
         ///---------------------------------------------------
     }
     
